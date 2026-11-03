@@ -41,6 +41,6 @@ Add a line to `CHANGELOG.md` under "Unreleased". Use [Conventional Commits](http
 
 ## Adding a skill
 
-A new skill lives in `skills/<name>/` with a `SKILL.md` whose `name` matches the folder. Add it to `.claude-plugin/marketplace.json` and to the README's list. Open an issue first so we can talk about scope.
+A new skill lives in `skills/<name>/` with a `SKILL.md` whose `name` matches the folder. Give it a `README.md` in its folder (its showcase, install and tools, media under `docs/<name>/`), a card in the root README, and an entry in `.claude-plugin/marketplace.json`. Open an issue first so we can talk about scope.
 
 By contributing you agree that your contribution is licensed under the MIT License and that you follow the [Code of Conduct](CODE_OF_CONDUCT.md).
