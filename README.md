@@ -1,20 +1,22 @@
 <p align="center">
-  <img src="docs/banner.png" alt="skills by vvhybe: the agent skills I use to ship real work, each one distilled from projects that shipped." width="100%">
+  <img src="docs/banner.png" alt="tebzira: agent skills, blended in Marrakech. The recipes I use to ship real work." width="100%">
 </p>
 
 <p align="center">
-  <a href="https://github.com/vvhybe/skills/actions/workflows/check.yml"><img src="https://github.com/vvhybe/skills/actions/workflows/check.yml/badge.svg" alt="Check"></a>
+  <a href="https://github.com/vvhybe/tebzira/actions/workflows/check.yml"><img src="https://github.com/vvhybe/tebzira/actions/workflows/check.yml/badge.svg" alt="Check"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b0b0b?style=flat" alt="MIT license"></a>
   <a href="https://agentskills.io"><img src="https://img.shields.io/badge/Agent%20Skills-compatible-0b0b0b?style=flat" alt="Agent Skills compatible"></a>
   <a href="#install"><img src="https://img.shields.io/badge/Claude%20Code-plugin-0b0b0b?style=flat" alt="Claude Code plugin"></a>
-  <a href="#the-skills"><img src="https://img.shields.io/badge/skills-2-0b0b0b?style=flat" alt="2 skills"></a>
+  <a href="#the-recipes"><img src="https://img.shields.io/badge/recipes-2-c0392b?style=flat" alt="2 recipes"></a>
 </p>
 
-# vvhybe/skills
+# tebzira
 
-These are the agent skills I use in my own work. Each one started as a private skill on a real project, got rewritten every time an owner said "not quite", and is shared here once it held up. They're not prompt collections: each is a method, with the scripts that check it and the traps it already fell into.
+> *Tebzira* is Marrakchi Darija for spices, and for the blend a cook keeps ready by the stove. This is mine.
 
-## The skills
+These are the agent skills I use in my own work. Each one started as a private skill on a real project, got rewritten every time an owner said "not quite", and is shared here once it held up. They're not prompt collections: each is a recipe, with its ingredients (what it needs), its method (how it works), the scripts that taste it as it cooks, and everything that burned along the way.
+
+## The recipes
 
 <table>
   <tr>
@@ -23,21 +25,21 @@ These are the agent skills I use in my own work. Each one started as a private s
       <h3><a href="skills/site-upgrade/README.md">site-upgrade</a></h3>
       <p>Turns a website into one its owner is proud to show: true claims, a design from the brand's own material, signature moments, a contact form that really delivers, SEO and security headers, a scored critique in a real browser, and PRs the team can review.</p>
       <p><sub>Built on an app's marketing site, its help center and a B2B company site taken through two directions.</sub></p>
-      <p><code>npx skills add vvhybe/skills --skill site-upgrade</code></p>
+      <p><code>npx skills add vvhybe/tebzira --skill site-upgrade</code></p>
     </td>
     <td width="50%" valign="top">
       <a href="skills/dev-guide/README.md"><img src="docs/dev-guide/banner.png" alt="dev-guide" width="100%"></a>
       <h3><a href="skills/dev-guide/README.md">dev-guide</a></h3>
       <p>Writes a developer guide for any repository as a learning book, every fact checked against the code, then typesets it as a PDF and a Word file with a publisher-grade cover: a public-domain engraving, one colour per volume, sibling repos as a series.</p>
       <p><sub>Built on three related production repositories, now Volumes I to III of one set.</sub></p>
-      <p><code>npx skills add vvhybe/skills --skill dev-guide</code></p>
+      <p><code>npx skills add vvhybe/tebzira --skill dev-guide</code></p>
     </td>
   </tr>
 </table>
 
-Each skill's own page has its showcase, how it works, its tools and what's inside.
+Each recipe's own page has its showcase, its method, its tools and what's inside.
 
-## What they share
+## What every recipe shares
 
 - **Evidence over taste.** Every claim on a website, and every fact in a guide, traces to a source. Rules in these skills come from things that happened on real projects.
 - **Real material over decoration.** The product itself, real outputs, a real engraving, never stock illustration or a fake dashboard.
@@ -50,17 +52,17 @@ Each skill's own page has its showcase, how it works, its tools and what's insid
 **Any agent that reads [Agent Skills](https://agentskills.io)** (Claude Code, Codex, Cursor, Gemini CLI and others), with the [`skills` CLI](https://github.com/vercel-labs/skills):
 
 ```bash
-npx skills add vvhybe/skills                        # choose from the list
-npx skills add vvhybe/skills --skill site-upgrade   # or name one
+npx skills add vvhybe/tebzira                        # choose from the list
+npx skills add vvhybe/tebzira --skill site-upgrade   # or name one
 ```
 
 <details>
 <summary><b>Claude Code plugin</b></summary>
 
 ```
-/plugin marketplace add vvhybe/skills
-/plugin install site-upgrade@vvhybe
-/plugin install dev-guide@vvhybe
+/plugin marketplace add vvhybe/tebzira
+/plugin install site-upgrade@tebzira
+/plugin install dev-guide@tebzira
 ```
 
 </details>
@@ -69,9 +71,9 @@ npx skills add vvhybe/skills --skill site-upgrade   # or name one
 <summary><b>From a clone, linked so <code>git pull</code> updates them</b></summary>
 
 ```bash
-git clone https://github.com/vvhybe/skills.git ~/src/vvhybe-skills
-ln -s ~/src/vvhybe-skills/skills/site-upgrade ~/.claude/skills/site-upgrade
-ln -s ~/src/vvhybe-skills/skills/dev-guide ~/.claude/skills/dev-guide
+git clone https://github.com/vvhybe/tebzira.git ~/src/tebzira
+ln -s ~/src/tebzira/skills/site-upgrade ~/.claude/skills/site-upgrade
+ln -s ~/src/tebzira/skills/dev-guide ~/.claude/skills/dev-guide
 ```
 
 </details>
@@ -91,7 +93,7 @@ scripts/validate.mjs   checks every skill: frontmatter, size, links, scripts par
 
 ## Contributing
 
-The most useful contribution is a [field report](https://github.com/vvhybe/skills/issues/new?template=field-report.yml): you ran a skill on a real project, and here's what happened. Rules here come from shipped work, so evidence beats opinion. See [CONTRIBUTING.md](CONTRIBUTING.md) for the writing style and the checks.
+The most useful contribution is a [field report](https://github.com/vvhybe/tebzira/issues/new?template=field-report.yml): you ran a skill on a real project, and here's what happened. Rules here come from shipped work, so evidence beats opinion. See [CONTRIBUTING.md](CONTRIBUTING.md) for the writing style and the checks.
 
 ## License
 

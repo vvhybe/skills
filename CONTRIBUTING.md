@@ -4,7 +4,7 @@ Thanks for helping. These skills get better one real project at a time, so the m
 
 ## Ways to help
 
-- **Field reports.** Open a [field report](https://github.com/vvhybe/skills/issues/new?template=field-report.yml): what you asked, what the agent did, what the owner said, and what fixed it. Owner quotes that don't map to anything in `feedback.md` are gold.
+- **Field reports.** Open a [field report](https://github.com/vvhybe/tebzira/issues/new?template=field-report.yml): what you asked, what the agent did, what the owner said, and what fixed it. Owner quotes that don't map to anything in `feedback.md` are gold.
 - **Gotchas.** A trap you hit, with its fix, belongs in `references/gotchas.md`.
 - **Scanner rules.** A tell you keep seeing, with a fixture that shows it and a test.
 - **Recipes.** A building block that shipped and that a client liked, written so it works on another brand.

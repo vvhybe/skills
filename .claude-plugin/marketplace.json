@@ -1,12 +1,12 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "vvhybe",
+  "name": "tebzira",
   "owner": {
     "name": "vvhybe",
     "url": "https://github.com/vvhybe"
   },
   "metadata": {
-    "description": "Agent skills for shipping real work, end to end."
+    "description": "tebzira: agent skills, blended in Marrakech. Each one a recipe proven on real work."
   },
   "plugins": [
     {
@@ -21,8 +21,8 @@
         "name": "vvhybe",
         "url": "https://github.com/vvhybe"
       },
-      "homepage": "https://github.com/vvhybe/skills",
-      "repository": "https://github.com/vvhybe/skills",
+      "homepage": "https://github.com/vvhybe/tebzira",
+      "repository": "https://github.com/vvhybe/tebzira",
       "license": "MIT",
       "category": "design",
       "keywords": [
@@ -47,8 +47,8 @@
         "name": "vvhybe",
         "url": "https://github.com/vvhybe"
       },
-      "homepage": "https://github.com/vvhybe/skills",
-      "repository": "https://github.com/vvhybe/skills",
+      "homepage": "https://github.com/vvhybe/tebzira",
+      "repository": "https://github.com/vvhybe/tebzira",
       "license": "MIT",
       "category": "documentation",
       "keywords": [

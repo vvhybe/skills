@@ -4,6 +4,10 @@ All notable changes to the skills in this repository. Versions follow [Semantic 
 
 ## Unreleased
 
+### Changed
+
+- The collection is now **tebzira** (Marrakchi Darija for spices, and a cook's blend): the repo is `vvhybe/tebzira`, the plugin marketplace is `tebzira` (`/plugin install site-upgrade@tebzira`), and each skill is presented as a recipe. Skill names are unchanged; GitHub redirects the old URL.
+
 ### Docs
 
 - Each skill has its own README (showcase, how it works, install, tools), with its media under `docs/<skill>/`. The root README presents the collection.
