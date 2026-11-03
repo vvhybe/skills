@@ -1,0 +1,42 @@
+name: Field report
+description: You ran a skill on a real site. Tell us what an owner said, what broke, or what worked.
+title: "Field report: "
+labels: ["field report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Field reports are how these skills get better. The best ones name a real reaction ("the owner said it looks like PowerPoint") and what fixed it. Leave out client names and anything private.
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      options: [site-upgrade]
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Kind of site
+      options: [Product or marketing site, Company or B2B site, Help center or docs, Portfolio or showcase, Other]
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The request, what the agent did, and the owner's or your reaction, in their words if you can.
+    validations:
+      required: true
+  - type: textarea
+    id: what-fixed-it
+    attributes:
+      label: What fixed it (or what you think would)
+  - type: input
+    id: phase
+    attributes:
+      label: Phase or reference file involved
+      placeholder: e.g. direction.md § 3, verification.md, slop-scan.mjs
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and model
+      placeholder: e.g. Claude Code with Opus 5.5

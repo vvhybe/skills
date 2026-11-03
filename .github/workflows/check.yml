@@ -1,0 +1,27 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Skills are valid (frontmatter, size, links, scripts parse)
+        run: node scripts/validate.mjs
+      - name: slop-scan regression tests
+        run: node --test tests/slop-scan.test.mjs
+      - name: Shell scripts pass shellcheck
+        run: shellcheck -S warning skills/*/scripts/*.sh

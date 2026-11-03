@@ -1,0 +1,18 @@
+name: Idea or new rule
+description: Propose a new recipe, rule, check or skill.
+title: "Idea: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Where did it work (or fail) on a real site? Rules here come from shipped work, not taste alone.
+    validations:
+      required: true

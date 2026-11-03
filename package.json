@@ -1,0 +1,13 @@
+{
+  "name": "vvhybe-skills",
+  "private": true,
+  "description": "Agent skills for shipping real work, end to end.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "check": "node scripts/validate.mjs && node --test tests/slop-scan.test.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test tests/slop-scan.test.mjs"
+  }
+}
