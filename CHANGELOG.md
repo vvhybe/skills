@@ -4,6 +4,26 @@ All notable changes to the skills in this repository. Versions follow [Semantic 
 
 ## Unreleased
 
+## dev-guide 2.0.0 (2026-11-03)
+
+The second skill: a developer guide for any repository, written as a learning book and typeset as one. Version 1 was a private skill built on three related repositories; its instructions had been truncated and its references lost, so 2.0 reconstructs them from the guides it produced and generalizes the pipeline.
+
+### Added
+
+- **Publisher-grade covers.** A public-domain plate (engraving, technical or botanical plate) printed in one ink above a panel in the volume's colour, set in EB Garamond, with a series line and volume number. `find_plate.py` searches open collections and records each plate's credit; `make_cover.py` cleans old scans to the cover's paper and previews the cover in seconds. The credit prints on the back cover.
+- **Series.** Sibling repositories become volumes of one series.
+- **A cover image** next to the PDF, for READMEs and link previews; the Word edition opens on the same cover.
+- **References** for research, writing (Diátaxis, the chapter anatomy, callouts, quizzes, diagrams), the cover, and build and verification. **Templates** for the config, home page, chapter and glossary.
+- `DEV_GUIDE_OUT` to build previews without touching the repository; evals; cover regression tests.
+- **Safe builds of untrusted repositories:** the author's raw HTML is cleaned, images must come from the guide, the PDF engine reads only the guide, the skill's assets and the work dir (never the network, never attachments), outputs stay in the repository, and config text is escaped.
+
+### Changed
+
+- The Word edition no longer needs PrinceXML: figures rasterize with WeasyPrint and poppler.
+- The Word builder is `build_docx.cjs`, so it runs inside projects whose `package.json` sets `"type": "module"`.
+- The illustrated cover styles are gone, replaced by the plate and type styles.
+- Montserrat's licence text now ships with the fonts.
+
 ## site-upgrade 2.0.0 (2026-11-03)
 
 The first public release. Version 1 was a private skill distilled from one marketing-site upgrade; 2.0 folds in two more projects (a B2B company site taken through two full directions, and a help center built from scratch), every piece of owner feedback from all three, and ideas from the best open design skills.
