@@ -19,18 +19,18 @@ These are the agent skills I use in my own work. Each one started as a private s
 <table>
   <tr>
     <td width="50%" valign="top">
-      <a href="skills/site-upgrade/README.md"><img src="docs/site-upgrade/banner.png" alt="site-upgrade"></a>
+      <a href="skills/site-upgrade/README.md"><img src="docs/site-upgrade/banner.png" alt="site-upgrade" width="100%"></a>
       <h3><a href="skills/site-upgrade/README.md">site-upgrade</a></h3>
       <p>Turns a website into one its owner is proud to show: true claims, a design from the brand's own material, signature moments, a contact form that really delivers, SEO and security headers, a scored critique in a real browser, and PRs the team can review.</p>
       <p><sub>Built on an app's marketing site, its help center and a B2B company site taken through two directions.</sub></p>
-      <pre lang="bash">npx skills add vvhybe/skills --skill site-upgrade</pre>
+      <p><code>npx skills add vvhybe/skills --skill site-upgrade</code></p>
     </td>
     <td width="50%" valign="top">
-      <a href="skills/dev-guide/README.md"><img src="docs/dev-guide/banner.png" alt="dev-guide"></a>
+      <a href="skills/dev-guide/README.md"><img src="docs/dev-guide/banner.png" alt="dev-guide" width="100%"></a>
       <h3><a href="skills/dev-guide/README.md">dev-guide</a></h3>
       <p>Writes a developer guide for any repository as a learning book, every fact checked against the code, then typesets it as a PDF and a Word file with a publisher-grade cover: a public-domain engraving, one colour per volume, sibling repos as a series.</p>
       <p><sub>Built on three related production repositories, now Volumes I to III of one set.</sub></p>
-      <pre lang="bash">npx skills add vvhybe/skills --skill dev-guide</pre>
+      <p><code>npx skills add vvhybe/skills --skill dev-guide</code></p>
     </td>
   </tr>
 </table>
