@@ -60,6 +60,32 @@
         "book",
         "agent-skills"
       ]
+    },
+    {
+      "name": "dashboard-upgrade",
+      "description": "Upgrades an app dashboard or back office built for one operator into a reliable, premium tool: maps their real day, fixes broken actions and money bugs first, builds forms that never lose input and errors they can report, reshapes screens around their tasks, adds one signature moment, and verifies in a real browser against a local database.",
+      "version": "2.0.0",
+      "source": "./",
+      "skills": [
+        "./skills/dashboard-upgrade"
+      ],
+      "author": {
+        "name": "vvhybe",
+        "url": "https://github.com/vvhybe"
+      },
+      "homepage": "https://github.com/vvhybe/tebzira",
+      "repository": "https://github.com/vvhybe/tebzira",
+      "license": "MIT",
+      "category": "design",
+      "keywords": [
+        "dashboard",
+        "admin",
+        "back-office",
+        "ux",
+        "nextjs",
+        "reliability",
+        "agent-skills"
+      ]
     }
   ]
 }
