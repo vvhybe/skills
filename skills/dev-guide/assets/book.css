@@ -1,0 +1,322 @@
+/* Developer guide, printed edition (WeasyPrint or PrinceXML). Placeholders are filled by build_book.py. */
+
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('{{FONTS}}/Inter-Regular.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 500; src: url('{{FONTS}}/Inter-Medium.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('{{FONTS}}/Inter-SemiBold.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 700; src: url('{{FONTS}}/Inter-Bold.ttf'); }
+@font-face { font-family: 'Montserrat'; font-weight: 400; src: url('{{FONTS}}/Montserrat-Regular.ttf'); }
+@font-face { font-family: 'Montserrat'; font-weight: 600; src: url('{{FONTS}}/Montserrat-SemiBold.ttf'); }
+@font-face { font-family: 'Montserrat'; font-weight: 700; src: url('{{FONTS}}/Montserrat-Bold.ttf'); }
+@font-face { font-family: 'Anton'; font-weight: 400; src: url('{{FONTS}}/Anton-Regular.ttf'); }
+@font-face { font-family: 'EB Garamond'; font-weight: 400; src: url('{{FONTS}}/EBGaramond-Regular.ttf'); }
+@font-face { font-family: 'EB Garamond'; font-weight: 500; src: url('{{FONTS}}/EBGaramond-Medium.ttf'); }
+@font-face { font-family: 'EB Garamond'; font-weight: 400; font-style: italic; src: url('{{FONTS}}/EBGaramond-Italic.ttf'); }
+
+/* ---------- Pages ---------------------------------------------------------------- */
+
+@page {
+    size: A4;
+    margin: 24mm 22mm 22mm 20mm;
+    @top-left {
+        content: string(part, first-except);
+        font: 700 6.8pt Montserrat; letter-spacing: 0.12em; text-transform: uppercase;
+        color: #8a8983; vertical-align: bottom; padding-bottom: 5mm;
+    }
+    @top-right {
+        content: string(chapter, first-except);
+        font: 600 8pt Montserrat; color: #52514e; vertical-align: bottom; padding-bottom: 5mm;
+    }
+    @bottom-left {
+        content: "{{FOOTER}}";
+        font: 7.2pt Inter; color: #a3a29c; vertical-align: middle; margin-top: 7mm; height: 6.5mm;
+    }
+    @bottom-right {
+        content: counter(page);
+        font: 700 8.5pt Montserrat; color: #ffffff; background-color: #52514e;
+        border-radius: 3.25mm; width: 12mm; height: 6.5mm; margin-top: 7mm;
+        text-align: center; vertical-align: middle;
+    }
+}
+
+@page part1 { background: url('{{BUILD}}/tab1.svg') no-repeat; background-size: 210mm 297mm; background-position: {{TABPOS}};
+    @bottom-right { background-color: #2a78d6; } @top-left { color: #2a78d6; } }
+@page part2 { background: url('{{BUILD}}/tab2.svg') no-repeat; background-size: 210mm 297mm; background-position: {{TABPOS}};
+    @bottom-right { background-color: #139a6b; } @top-left { color: #139a6b; } }
+@page part3 { background: url('{{BUILD}}/tab3.svg') no-repeat; background-size: 210mm 297mm; background-position: {{TABPOS}};
+    @bottom-right { background-color: #eb6834; } @top-left { color: #eb6834; } }
+@page part4 { background: url('{{BUILD}}/tab4.svg') no-repeat; background-size: 210mm 297mm; background-position: {{TABPOS}};
+    @bottom-right { background-color: #4a3aa7; } @top-left { color: #4a3aa7; } }
+
+@page cover { margin: 0;
+    @top-left { content: none; } @top-right { content: none; }
+    @bottom-left { content: none; } @bottom-right { content: none; } }
+@page back { margin: 0; background: #1a1a19;
+    @top-left { content: none; } @top-right { content: none; }
+    @bottom-left { content: none; } @bottom-right { content: none; } }
+@page div1 { margin: 0; background: #2a78d6; @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page div2 { margin: 0; background: #139a6b; @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page div3 { margin: 0; background: #eb6834; @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page div4 { margin: 0; background: #4a3aa7; @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+
+/* ---------- Base ------------------------------------------------------------------ */
+
+html { font-family: 'Inter', sans-serif; font-size: 9.8pt; line-height: 1.55; color: #1a1a19; }
+body { margin: 0; hyphens: auto; }
+p { margin: 0 0 3mm; orphans: 3; widows: 3; }
+strong { font-weight: 600; color: #0b0b0b; }
+a { color: var(--cd); text-decoration: none; }
+a.xref::after {
+    content: "\00a0(p.\00a0" target-counter(attr(href), page) ")";
+    font-size: 0.82em; color: #8a8983; font-weight: 400;
+}
+a.ext { border-bottom: 0.2mm dotted var(--cd); }
+
+section { --c: #52514e; --cd: #3a3935; --ct: #f5f4f0; --cs: #e4e3df; --ci: #1a1a19; }
+.part1, .p1, .div1 { --c: #2a78d6; --cd: #1b5aa6; --ct: #eef5fd; --cs: #cfe0f7; --ci: #0b2545; }
+.part2, .p2, .div2 { --c: #139a6b; --cd: #0d7a54; --ct: #ecf8f2; --cs: #c8ebdb; --ci: #08372a; }
+.part3, .p3, .div3 { --c: #eb6834; --cd: #c24e1f; --ct: #fdf2ec; --cs: #f9d5c4; --ci: #4a1a06; }
+.part4, .p4, .div4 { --c: #4a3aa7; --cd: #372a85; --ct: #f2f0fb; --cs: #dcd8f3; --ci: #1d1640; }
+.front { --c: #eb6834; --cd: #c24e1f; --ct: #fdf2ec; --cs: #f9d5c4; }
+
+h2 {
+    font: 700 14.5pt/1.25 Montserrat; color: var(--ci);
+    margin: 8mm 0 3mm; page-break-after: avoid; bookmark-level: 3;
+}
+h2::before {
+    content: ""; display: inline-block; width: 2.6mm; height: 2.6mm; border-radius: 0.8mm;
+    background: var(--c); margin-right: 2.6mm; vertical-align: 0.12em;
+}
+h3 { font: 700 11pt/1.3 Montserrat; color: #1a1a19; margin: 6mm 0 2mm; page-break-after: avoid; bookmark-level: none; }
+
+ul, ol { margin: 0 0 3.5mm; padding-left: 6mm; }
+li { margin: 0.8mm 0; }
+ul > li::marker { color: var(--c); }
+ol > li::marker { color: var(--c); font-weight: 700; font-family: Montserrat; }
+li > p { margin-bottom: 1mm; }
+
+code {
+    font-family: 'DejaVu Sans Mono', monospace; font-size: 0.84em;
+    background: #f1f0ec; color: var(--cd); padding: 0.15mm 0.9mm; border-radius: 0.9mm;
+}
+hr { display: none; }
+
+/* ---------- Chapters --------------------------------------------------------------- */
+
+/* `part` is set by the chapter's h1 below, not by the .chapter section. A section spans many
+   pages, and engines disagree about which of those count as the page the string was set on:
+   Prince takes only the first, WeasyPrint takes every page the section covers, which blanks
+   string(part, first-except) for the whole book. An h1 sits on one page, so both agree. */
+.chapter, .front, .toc {
+    page-break-before: always; prince-page-group: start;
+}
+.front, .toc { string-set: part attr(data-part); }
+.chapter.part1 { page: part1; } .chapter.part2 { page: part2; }
+.chapter.part3 { page: part3; } .chapter.part4 { page: part4; }
+.front, .toc { page: front; }
+h1, h2, h3, .ptitle, .pt, .toc-list, .kicker, .title, .subtitle, th, .callout-title { hyphens: none; }
+
+.opener { position: relative; margin: 2mm 0 6mm; padding: 0 0 5mm; border-bottom: 1mm solid var(--c); }
+.kicker { font: 700 7.5pt Montserrat; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c); margin-bottom: 4mm; }
+.numrow { margin-bottom: 3mm; }
+.num {
+    display: inline-block; font: 38pt/1 Anton; color: #ffffff; background: var(--c);
+    padding: 2.5mm 4.5mm 2mm; border-radius: 3mm; letter-spacing: 0.02em;
+}
+.num.gl { font-size: 26pt; padding: 3mm 4mm; }
+.opener h1 {
+    font: 700 25pt/1.15 Montserrat; color: #111111; margin: 0 0 4mm;
+    string-set: chapter attr(data-running), part attr(data-part); bookmark-level: 2;
+}
+.lead { font-size: 11.5pt; line-height: 1.5; color: #3a3935; margin: 0; }
+
+.objectives {
+    background: var(--ct); border: 0.35mm solid var(--cs); border-radius: 3mm;
+    padding: 4mm 5mm 3mm; margin: 0 0 7mm; page-break-inside: avoid;
+}
+.objectives .callout-title { color: var(--cd); }
+.objectives ul { list-style: none; padding-left: 0; margin: 0; }
+.objectives li { padding-left: 6mm; position: relative; margin: 1.2mm 0; }
+.objectives li::before {
+    content: ""; position: absolute; left: 0.5mm; top: 1.3mm; width: 2.2mm; height: 2.2mm;
+    border-radius: 50%; background: var(--c);
+}
+
+/* ---------- Callouts --------------------------------------------------------------- */
+
+.callout-title {
+    font: 700 8.2pt Montserrat; letter-spacing: 0.07em; text-transform: uppercase;
+    margin-bottom: 1.6mm; color: var(--k);
+}
+.ico svg { width: 4.4mm; height: 4.4mm; vertical-align: -1.1mm; margin-right: 2mm; }
+.callout {
+    --k: #2a78d6; --kt: #eef5fd;
+    background: var(--kt); border-left: 1.4mm solid var(--k); border-radius: 0 2.6mm 2.6mm 0;
+    padding: 3.4mm 4.5mm 3.2mm 4.8mm; margin: 4.5mm 0 5mm; page-break-inside: avoid;
+}
+.callout .callout-body > :last-child { margin-bottom: 0; }
+.callout .callout-body ol, .callout .callout-body ul { margin-bottom: 0; }
+.callout.note  { --k: #2a78d6; --kt: #eef5fd; }
+.callout.tip   { --k: #1f8a3b; --kt: #ebf6ed; }
+.callout.why   { --k: #4a3aa7; --kt: #f2f0fb; }
+.callout.warn  { --k: #b87700; --kt: #fff6df; }
+.callout.never { --k: #cf3736; --kt: #fdeeee; }
+.callout.why .callout-body { font-style: normal; }
+
+/* ---------- Code ------------------------------------------------------------------- */
+
+pre.code {
+    position: relative; background: #f7f7f9; border: 0.3mm solid #e6e6ea; border-left: 1.2mm solid var(--c);
+    border-radius: 0 2.4mm 2.4mm 0; padding: 3.6mm 4mm 3.2mm; margin: 3mm 0 5mm;
+    font: 7.9pt/1.5 'DejaVu Sans Mono', monospace; white-space: pre-wrap; page-break-inside: avoid;
+}
+pre.code code { background: none; color: #24292f; padding: 0; font-size: 1em; border-radius: 0; }
+pre.code .lang {
+    position: absolute; top: 0; right: 0; background: var(--c); color: #ffffff;
+    font: 700 6.3pt Montserrat; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.9mm 2.4mm; border-radius: 0 2.2mm 0 2.2mm;
+}
+pre.lang-text { border-left-color: #a3a29c; background: #fbfaf7; }
+
+/* ---------- Tables ----------------------------------------------------------------- */
+
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 3mm 0 6mm; font-size: 8.6pt; line-height: 1.42; }
+thead { display: table-header-group; }
+th {
+    background: var(--c); color: #ffffff; font: 700 7.8pt Montserrat; letter-spacing: 0.02em;
+    text-align: left; padding: 2.1mm 2.6mm; vertical-align: bottom;
+}
+th:first-child { border-top-left-radius: 2mm; }
+th:last-child { border-top-right-radius: 2mm; }
+td { padding: 1.9mm 2.6mm; border-bottom: 0.25mm solid #e7e6e1; vertical-align: top; overflow-wrap: break-word; }
+tbody tr:nth-child(even) td { background: var(--ct); }
+tr { page-break-inside: avoid; }
+td code { font-size: 0.86em; }
+td strong { color: var(--cd); }
+
+/* ---------- Stats, figures, tasks ------------------------------------------------- */
+
+.stats { display: flex; margin: 4mm 0 6mm; }
+.stat { flex: 1; margin-right: 2.6mm; border-radius: 3mm; padding: 3.8mm 2mm 3.2mm; color: #ffffff; text-align: center; }
+.stat:last-child { margin-right: 0; }
+.stat .n { font: 27pt/1 Anton; letter-spacing: 0.02em; }
+.stat .l { font: 700 6.6pt Montserrat; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1.8mm; }
+.tile-0 { background: #2a78d6; } .tile-1 { background: #139a6b; } .tile-2 { background: #eb6834; }
+.tile-3 { background: #4a3aa7; } .tile-4 { background: #c98500; }
+
+figure.fig { margin: 4mm 0 6mm; page-break-inside: avoid; text-align: center; }
+figure.fig img { display: block; margin: 0 auto; }
+figure.diagram { border: 0.3mm solid #e7e6e1; border-radius: 3mm; padding: 4mm 3mm 3mm; }
+figcaption { font: 8.4pt/1.4 Inter; color: #52514e; margin-top: 3mm; }
+.fignum { font: 700 7.2pt Montserrat; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); margin-right: 1.5mm; }
+
+li.task { list-style: none; margin-left: -6mm; }
+li.task .box {
+    display: inline-block; width: 3.2mm; height: 3.2mm; border: 0.4mm solid var(--c); border-radius: 0.8mm;
+    margin-right: 2.4mm; vertical-align: -0.5mm;
+}
+
+/* ---------- Check yourself ---------------------------------------------------------- */
+
+.quiz {
+    margin: 9mm 0 0; background: #fffaeb; border: 0.4mm dashed #e2b33d; border-radius: 3mm;
+    padding: 4.5mm 5.5mm 2mm;
+}
+.quiz-title { font: 700 12pt Montserrat; color: #946300; margin-bottom: 2mm; bookmark-level: none; }
+.quiz-title .ico svg { width: 5mm; height: 5mm; vertical-align: -1.2mm; }
+.quiz .question { margin: 3.2mm 0 1.2mm; page-break-after: avoid; }
+.quiz .question strong { font-weight: 600; }
+.quiz .answer {
+    font-size: 8.8pt; color: #4a4944; padding: 1mm 0 1mm 3.5mm; border-left: 0.9mm solid #f0c75a;
+    margin: 0 0 3.2mm; page-break-inside: avoid;
+}
+.a-label { font: 700 6.6pt Montserrat; letter-spacing: 0.1em; text-transform: uppercase; color: #946300; margin-right: 1.4mm; }
+
+/* ---------- Glossary ----------------------------------------------------------------- */
+
+.glossary .body { columns: 2; column-gap: 9mm; }
+.glossary .body h2 { font: 700 10.5pt Montserrat; color: var(--cd); margin: 3.5mm 0 0.8mm; bookmark-level: none; }
+.glossary .body h2::before { width: 1.8mm; height: 1.8mm; margin-right: 2mm; }
+.glossary .body p { font-size: 8.8pt; margin-bottom: 1.5mm; }
+
+/* ---------- Table of contents ----------------------------------------------------- */
+
+.toc h1 { font: 700 30pt/1.1 Montserrat; margin: 2mm 0 6mm; string-set: chapter attr(data-running); }
+.toc-list { list-style: none; padding: 0; margin: 0; }
+.toc-list li { margin: 0; }
+.toc-list a { color: #1a1a19; display: block; }
+.toc-list a::after { content: leader(dotted) " " target-counter(attr(href), page); color: #8a8983; font-weight: 400; }
+.toc-front a { font: 600 10.5pt Montserrat; padding: 1.5mm 0 3mm; }
+.toc-part { margin-top: 3.2mm !important; }
+.toc-part a {
+    background: var(--c); color: #ffffff; border-radius: 2mm; padding: 1.8mm 3.5mm;
+    font: 700 10.5pt Montserrat;
+}
+.toc-part a::after { color: #ffffffcc; content: leader(" ") target-counter(attr(href), page); }
+.toc-part .pr { font: 11pt Anton; letter-spacing: 0.06em; margin-right: 3mm; opacity: 0.9; }
+.toc-ch a { padding: 1.15mm 0 1.15mm 3.5mm; border-bottom: 0.2mm solid #eeede8; font-size: 10pt; }
+.toc-ch .cn { display: inline-block; width: 9mm; font: 12pt Anton; color: var(--c); }
+
+/* ---------- Part dividers ------------------------------------------------------------ */
+
+.divider {
+    page-break-before: always; prince-page-group: start; position: relative;
+    height: 297mm; padding: 34mm 24mm 0 24mm; color: #ffffff; box-sizing: border-box;
+}
+.div1 { page: div1; } .div2 { page: div2; } .div3 { page: div3; } .div4 { page: div4; }
+.divider .roman {
+    position: absolute; right: 16mm; top: 12mm; font: 190pt/1 Anton; color: rgba(255, 255, 255, 0.16);
+}
+.divider .plabel { font: 700 10pt Montserrat; letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.85; }
+.divider .ptitle { font: 700 38pt/1.1 Montserrat; margin: 4mm 0 18mm; bookmark-level: 1; max-width: 140mm; }
+.pchapters { list-style: none; padding: 0; margin: 0; }
+.pchapters li { margin: 0 0 7mm; }
+.pchapters a { color: #ffffff; display: flex; }
+.pchapters .pn { font: 26pt/1 Anton; width: 20mm; flex: none; opacity: 0.85; }
+.pchapters .pt { display: block; font: 700 13pt/1.3 Montserrat; }
+.pchapters .pd { display: block; font: 10pt/1.4 Inter; opacity: 0.9; margin-top: 0.8mm; }
+.pchapters a > span.pt, .pchapters a > span.pd { }
+.pchapters a { flex-wrap: wrap; }
+.pchapters .pt, .pchapters .pd { width: 140mm; margin-left: 20mm; }
+.pchapters .pn { position: absolute; }
+.pchapters li { position: relative; }
+
+/* ---------- Covers ------------------------------------------------------------------ */
+
+/* ---------- Cover: a plate printed in one ink, above a panel in the volume's colour ---------- */
+
+.cover { page: cover; position: relative; height: 297mm; background: var(--paper); color: var(--ink); }
+.cover *, .backcover * { box-sizing: border-box; }
+.cover-head {
+    position: absolute; top: 14mm; left: 18mm; right: 18mm; display: flex; justify-content: space-between;
+    font: 600 7.4pt Inter; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink);
+    padding-bottom: 2.6mm; border-bottom: 0.25mm solid var(--ink);
+}
+.cover-art { position: absolute; top: 27mm; left: 18mm; right: 18mm; height: 168mm;
+             display: flex; align-items: center; justify-content: center; }
+.cover .plate { margin: 0; text-align: center; }
+.cover .plate img { display: block; margin: 0 auto; max-width: 174mm; max-height: 146mm; }
+.cover .plate.wide img { width: 174mm; }
+.cover .plate.tall img { height: 146mm; }
+.cover .plate figcaption { font: italic 8.6pt/1.3 'EB Garamond'; color: var(--ink); opacity: 0.72; margin-top: 3mm; }
+.cover .type-mark { font: 500 330pt/0.8 'EB Garamond'; color: var(--colour); }
+.cover-panel {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 96mm; background: var(--colour); color: var(--on);
+    padding: 15mm 18mm 0;
+}
+.cover .title { font: 500 54pt/1 'EB Garamond'; letter-spacing: -0.01em; bookmark-level: 1; bookmark-label: "Cover"; }
+.cover .subtitle { font: italic 26pt/1.15 'EB Garamond'; margin-top: 2mm; opacity: 0.92; }
+.cover .tagline { font: 11pt/1.5 Inter; margin: 8mm 0 0; max-width: 140mm; opacity: 0.88; hyphens: manual; }
+.cover-foot {
+    position: absolute; left: 18mm; right: 18mm; bottom: 12mm; display: flex; justify-content: space-between;
+    font: 600 7.4pt Inter; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85;
+    border-top: 0.25mm solid currentColor; padding-top: 3mm;
+}
+
+.backcover { page: back; page-break-before: always; position: relative; height: 297mm; color: var(--on); background: var(--colour); }
+.backcover .colophon { position: absolute; left: 24mm; right: 24mm; bottom: 26mm; font-size: 9.5pt; line-height: 1.6; }
+.backcover .big { font: 500 18pt 'EB Garamond'; margin-bottom: 5mm; }
+.backcover code { background: rgba(0, 0, 0, 0.18); color: inherit; }
+.backcover .credit { font-size: 8.5pt; opacity: 0.85; }
+.backcover .legal { font-size: 8.5pt; margin-top: 6mm; opacity: 0.75; }
+
+.about h1 { string-set: chapter attr(data-running); }
