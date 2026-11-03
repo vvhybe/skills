@@ -4,12 +4,17 @@ All notable changes to the skills in this repository. Versions follow [Semantic 
 
 ## Unreleased
 
+### Added
+
+- **dashboard-upgrade 2.0.0**, the third recipe: upgrades a dashboard or back office built for one operator into a reliable, premium tool. Reliability first (money and action bugs with tests, a hotfix PR when production is broken), shared foundations (a form sheet that never loses input, one data table, coded errors the operator can report), screens shaped around the operator's day, one signature moment, and verification in a real browser and against a local database. Version 1 was a private skill; 2.0 names its public reference implementation ([jnaninyoga/dashboard](https://github.com/jnaninyoga/dashboard)), adds the 9/10 rule, a feedback decoder, evals and a README.
+
 ### Changed
 
 - The collection is now **tebzira** (Marrakchi Darija for spices, and a cook's blend): the repo is `vvhybe/tebzira`, the plugin marketplace is `tebzira` (`/plugin install site-upgrade@tebzira`), and each skill is presented as a recipe. Skill names are unchanged; GitHub redirects the old URL.
 
 ### Docs
 
+- New banners for the collection and every recipe: zellige tilework in spice colours, *zellige m3a tebzira*.
 - Each skill has its own README (showcase, how it works, install, tools), with its media under `docs/<skill>/`. The root README presents the collection.
 
 ## dev-guide 2.0.0 (2026-11-03)
