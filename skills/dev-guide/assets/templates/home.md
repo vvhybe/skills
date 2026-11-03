@@ -80,5 +80,5 @@ This guide explains; the code decides. When the two disagree, the files below wi
 *Written against <project> <version> on <as_of>.*
 
 > **Printable editions.** The same guide as a designed book: [PDF](../<name>-developer-guide.pdf) for printing, [Word](../<name>-developer-guide.docx) for editing. Both are built from these pages; rebuild them when the pages change.
-
-[![The printed edition's cover](../<name>-developer-guide-cover.png)](../<name>-developer-guide.pdf)
+>
+> [![The printed edition's cover](../<name>-developer-guide-cover.png)](../<name>-developer-guide.pdf)

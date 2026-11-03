@@ -55,10 +55,10 @@ It searches Wikimedia Commons by default (which mirrors most open library scans)
 **Look before choosing.** Open the contact sheet. Pick for clarity at thumbnail size, line work over muddy tone, and a subject that reads at a glance. Show the owner two or three and recommend one. Then:
 
 ```bash
-$PY <skill>/scripts/find_plate.py --get "commons:File:Printing_press.jpg" --out docs/guide/assets/cover
+$PY <skill>/scripts/find_plate.py --get "commons:File:Printing_press.jpg" --out docs/guide/assets/plate
 ```
 
-It downloads the full-resolution file and writes `<name>.json` beside it with the source page, licence and a ready credit line. Commit both, so the book builds offline and the credit travels with the image. Aim for at least 2000 px on the long side.
+It downloads the full-resolution file and writes `<name>.json` beside it with the source page, licence and a ready credit line. Commit both, so the book builds offline and the credit travels with the image. The cover prints the plate about 174 mm wide, so around 2100 px on the long side is plenty; resize larger scans to that (grayscale JPEG, quality ~82) before committing. The folder is `plate/`, not `cover/`: the standard Python `.gitignore` ignores `cover/` (coverage reports).
 
 ## 5. Treatment and layout
 
@@ -101,7 +101,7 @@ In `.print.json`:
   "volume": "Volume II",
   "colour": "#1F3A5F",
   "plate": {
-    "file": "docs/guide/assets/cover/printing-press.jpg",
+    "file": "docs/guide/assets/plate/printing-press.jpg",
     "caption": "Perspective view of a common printing press. Engraving by John Farey, 1819.",
     "crop": [0, 0, 1, 1]
   }

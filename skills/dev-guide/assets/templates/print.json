@@ -20,7 +20,7 @@
     "volume": "Volume I",
     "colour": "#1F3A5F",
     "plate": {
-      "file": "docs/guide/assets/cover/plate.jpg",
+      "file": "docs/guide/assets/plate/plate.jpg",
       "caption": "What the plate shows. Engraving by its maker, year."
     }
   },

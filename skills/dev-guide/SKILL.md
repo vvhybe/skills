@@ -39,7 +39,7 @@ It was built on three related repositories (a rendering service, its PDF engine 
 | 3. Plan | Choose the four parts and the chapters; copy `assets/templates/print.json` to `docs/guide/.print.json` and fill it | [references/writing.md](references/writing.md) § Structure |
 | 4. Write | The home page from `assets/templates/home.md`, each chapter from `chapter.md`, the glossary from `glossary.md` | [references/writing.md](references/writing.md) |
 | 5. Figures | Mermaid diagrams in the pages; charts only from verified numbers (`scripts/charts.py`); check printed sizes with `scripts/diagram_sizes.py` | [references/writing.md](references/writing.md) § Diagrams |
-| 6. Cover | Find a plate with `scripts/find_plate.py`, look at the candidates, download one into `docs/guide/assets/cover/`, set `cover` in the config, preview it | [references/cover.md](references/cover.md) |
+| 6. Cover | Find a plate with `scripts/find_plate.py`, look at the candidates, download one into `docs/guide/assets/plate/`, set `cover` in the config, preview it | [references/cover.md](references/cover.md) |
 | 7. Build | `bash <skill>/scripts/build.sh docs/guide/.print.json` | [references/build.md](references/build.md) |
 | 8. Verify | Contact sheets of every page, the cover at thumbnail size, links, a final fact re-check | [references/build.md](references/build.md) § Verify |
 | 9. Ship | Link the printable editions and the cover thumbnail from the guide's home page and the repo README; open a PR | [references/build.md](references/build.md) § Ship |

@@ -53,7 +53,7 @@ def plate():
     spec = COVER.get("plate") or {}
     src = (REPO / spec["file"]).resolve()
     if not src.is_relative_to(REPO):
-        sys.exit(f"cover plate must be inside the repository (docs/guide/assets/cover/): {spec['file']}")
+        sys.exit(f"cover plate must be inside the repository (docs/guide/assets/plate/): {spec['file']}")
     if not src.is_file():
         sys.exit(f"cover plate not found: {src}")
     credit = spec.get("credit")
