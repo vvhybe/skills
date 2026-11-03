@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vvhybe/skills/actions/workflows/check.yml"><img src="https://github.com/vvhybe/skills/actions/workflows/check.yml/badge.svg" alt="Check"></a>
+  <a href="https://github.com/vvhybe/tebzira/actions/workflows/check.yml"><img src="https://github.com/vvhybe/tebzira/actions/workflows/check.yml/badge.svg" alt="Check"></a>
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b0b0b?style=flat" alt="MIT license"></a>
   <a href="https://agentskills.io"><img src="https://img.shields.io/badge/Agent%20Skills-compatible-0b0b0b?style=flat" alt="Agent Skills compatible"></a>
   <a href="#install"><img src="https://img.shields.io/badge/Claude%20Code-plugin-0b0b0b?style=flat" alt="Claude Code plugin"></a>
@@ -12,7 +12,7 @@
 
 # dev-guide
 
-<sub>Part of [vvhybe/skills](../../README.md), the agent skills I use in my own work.</sub>
+<sub>A recipe from [tebzira](../../README.md), the blend of agent skills I use in my own work.</sub>
 
 Most generated documentation is a pile of pages. **dev-guide** writes a *book*: a guided tour of a codebase for a capable developer who has never seen it, checked fact by fact against the code, then typeset as a PDF and a Word file that look like they came from a publisher.
 
@@ -81,15 +81,15 @@ flowchart TD
 **Any agent that reads Agent Skills** (Claude Code, Codex, Cursor, Gemini CLI and others), with the [`skills` CLI](https://github.com/vercel-labs/skills):
 
 ```bash
-npx skills add vvhybe/skills --skill dev-guide
+npx skills add vvhybe/tebzira --skill dev-guide
 ```
 
 <details>
 <summary><b>Claude Code plugin</b></summary>
 
 ```
-/plugin marketplace add vvhybe/skills
-/plugin install dev-guide@vvhybe
+/plugin marketplace add vvhybe/tebzira
+/plugin install dev-guide@tebzira
 ```
 
 </details>
@@ -98,8 +98,8 @@ npx skills add vvhybe/skills --skill dev-guide
 <summary><b>From a clone, linked so <code>git pull</code> updates it</b></summary>
 
 ```bash
-git clone https://github.com/vvhybe/skills.git ~/src/vvhybe-skills
-ln -s ~/src/vvhybe-skills/skills/dev-guide ~/.claude/skills/dev-guide
+git clone https://github.com/vvhybe/tebzira.git ~/src/tebzira
+ln -s ~/src/tebzira/skills/dev-guide ~/.claude/skills/dev-guide
 ```
 
 </details>
@@ -170,7 +170,7 @@ dev-guide/
 
 ## Contributing
 
-Ran it on a real repository? A [field report](https://github.com/vvhybe/skills/issues/new?template=field-report.yml) helps most: what the guide got right, what a reader stumbled on. See [CONTRIBUTING.md](../../CONTRIBUTING.md).
+Ran it on a real repository? A [field report](https://github.com/vvhybe/tebzira/issues/new?template=field-report.yml) helps most: what the guide got right, what a reader stumbled on. See [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 ## License
 

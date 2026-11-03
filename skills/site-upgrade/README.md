@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vvhybe/skills/actions/workflows/check.yml"><img src="https://github.com/vvhybe/skills/actions/workflows/check.yml/badge.svg" alt="Check"></a>
+  <a href="https://github.com/vvhybe/tebzira/actions/workflows/check.yml"><img src="https://github.com/vvhybe/tebzira/actions/workflows/check.yml/badge.svg" alt="Check"></a>
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b0b0b?style=flat" alt="MIT license"></a>
   <a href="https://agentskills.io"><img src="https://img.shields.io/badge/Agent%20Skills-compatible-0b0b0b?style=flat" alt="Agent Skills compatible"></a>
   <a href="#install"><img src="https://img.shields.io/badge/Claude%20Code-plugin-0b0b0b?style=flat" alt="Claude Code plugin"></a>
@@ -12,7 +12,7 @@
 
 # site-upgrade
 
-<sub>Part of [vvhybe/skills](../../README.md), the agent skills I use in my own work.</sub>
+<sub>A recipe from [tebzira](../../README.md), the blend of agent skills I use in my own work.</sub>
 
 Most design skills teach an agent taste. **site-upgrade** teaches it the whole job a senior design engineer does when a company says *"make our website premium"*:
 
@@ -110,15 +110,15 @@ The method works on any stack; the recipes and snippets come from where they shi
 **Any agent that reads Agent Skills** (Claude Code, Codex, Cursor, Gemini CLI and others), with the [`skills` CLI](https://github.com/vercel-labs/skills):
 
 ```bash
-npx skills add vvhybe/skills --skill site-upgrade
+npx skills add vvhybe/tebzira --skill site-upgrade
 ```
 
 <details>
 <summary><b>Claude Code plugin</b></summary>
 
 ```
-/plugin marketplace add vvhybe/skills
-/plugin install site-upgrade@vvhybe
+/plugin marketplace add vvhybe/tebzira
+/plugin install site-upgrade@tebzira
 ```
 
 </details>
@@ -127,8 +127,8 @@ npx skills add vvhybe/skills --skill site-upgrade
 <summary><b>From a clone, linked so <code>git pull</code> updates it</b></summary>
 
 ```bash
-git clone https://github.com/vvhybe/skills.git ~/src/vvhybe-skills
-ln -s ~/src/vvhybe-skills/skills/site-upgrade ~/.claude/skills/site-upgrade
+git clone https://github.com/vvhybe/tebzira.git ~/src/tebzira
+ln -s ~/src/tebzira/skills/site-upgrade ~/.claude/skills/site-upgrade
 ```
 
 </details>
@@ -237,7 +237,7 @@ Where those skills focus on the page, site-upgrade wraps the whole engagement ar
 
 ## Contributing
 
-The best contribution is a [field report](https://github.com/vvhybe/skills/issues/new?template=field-report.yml): you ran the skill on a real site, and here's what the owner said. Rules here come from shipped work, so evidence beats opinion. See [CONTRIBUTING.md](../../CONTRIBUTING.md).
+The best contribution is a [field report](https://github.com/vvhybe/tebzira/issues/new?template=field-report.yml): you ran the skill on a real site, and here's what the owner said. Rules here come from shipped work, so evidence beats opinion. See [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 ## License
 
