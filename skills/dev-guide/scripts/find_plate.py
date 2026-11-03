@@ -22,7 +22,7 @@ import urllib.request
 from datetime import date
 from pathlib import Path
 
-UA = "dev-guide-cover/1.0 (https://github.com/vvhybe/skills; book cover research)"
+UA = "dev-guide-cover/1.0 (https://github.com/vvhybe/tebzira; book cover research)"
 OPEN = re.compile(r"public domain|^pd\b|pd-|cc0|no restrictions", re.I)
 BY = re.compile(r"^cc[ -]by(-sa)?\b", re.I)
 

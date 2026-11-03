@@ -22,6 +22,6 @@ We want this to be a welcoming place for everyone who builds for the web, whatev
 
 ## Enforcement
 
-Report problems to the maintainer through the contact listed on [@vvhybe's GitHub profile](https://github.com/vvhybe). Reports are handled privately. The maintainer may remove comments, commits or contributions, and may ban contributors, temporarily or permanently, for behavior that breaks this code.
+Report problems to the maintainer through the contact listed on [@tebzira's GitHub profile](https://github.com/vvhybe). Reports are handled privately. The maintainer may remove comments, commits or contributions, and may ban contributors, temporarily or permanently, for behavior that breaks this code.
 
 This code applies in all project spaces and when someone represents the project in public.

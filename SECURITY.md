@@ -4,7 +4,7 @@ The skills here are instructions plus a few small scripts. The scripts read file
 
 ## Reporting a vulnerability
 
-If you find a script that can be made to do any of those things, or anything else that could harm someone who installs a skill, report it privately through [GitHub's private vulnerability reporting](https://github.com/vvhybe/skills/security/advisories/new). Please don't open a public issue.
+If you find a script that can be made to do any of those things, or anything else that could harm someone who installs a skill, report it privately through [GitHub's private vulnerability reporting](https://github.com/vvhybe/tebzira/security/advisories/new). Please don't open a public issue.
 
 You'll get a reply within a few days. Fixes ship as a patch release with credit to you, unless you'd rather stay anonymous.
 
