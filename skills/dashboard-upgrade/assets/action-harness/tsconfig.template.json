@@ -1,0 +1,10 @@
+{
+	"extends": "<REPO>/tsconfig.json",
+	"compilerOptions": {
+		"paths": {
+			"@/*": ["<REPO>/*"],
+			"next/cache": ["<HARNESS>/next-cache-stub.ts"],
+			"@/lib/auth/require-user": ["<HARNESS>/require-user-stub.ts"]
+		}
+	}
+}

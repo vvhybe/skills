@@ -1,0 +1,55 @@
+{
+  "skill_name": "dashboard-upgrade",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Our studio's admin dashboard is a mess. Payments sometimes fail, forms lose what I typed, and it's ugly on my phone. Spice it up and make it premium. The repo is this one.",
+      "expected_output": "Starts with kickoff and discovery, not styling: maps the operator's day, audits every route and action, finds the truth sources for money, rates the dashboard honestly, and proposes a phased plan where payment and data bugs come first, with a separate hotfix PR if production is broken.",
+      "files": [],
+      "expectations": [
+        "Sets up a local database and dev server and takes baseline screenshots at 1440 and 390 before changing code",
+        "Maps the operator's real day (device, moments, tasks) before proposing screens",
+        "Orders the work: data and action bugs with tests, then shared foundations, then flows, then spice",
+        "Proposes a separate hotfix PR for production-breaking bugs and one epic PR for the rest",
+        "Asks the owner's money and production decisions once, with options, without stalling other work",
+        "Does not query or migrate the production database"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "The owner says the create-client dialog closes when they tap outside and they lose everything. Fix it across the app.",
+      "expected_output": "Builds or reuses one shared form surface (a sheet on desktop, a drawer on phones) that asks before discarding a dirty form, moves every create and edit form onto it, and deletes the old dialog variants.",
+      "files": [],
+      "expectations": [
+        "Replaces dialogs with one shared sheet or drawer component rather than patching each dialog",
+        "Asks for confirmation before discarding a form with unsaved input",
+        "Moves every create and edit form onto the shared component and removes the old variants",
+        "Verifies at phone width that the drawer works with the on-screen keyboard"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A payment save fails with 'Something went wrong'. The owner can't tell me what happened. Make errors useful.",
+      "expected_output": "Gives every server action failure a short code that matches a server log line, surfaces it in a toast with a report action the operator can send, and finds the root cause of the payment failure with a test.",
+      "files": [],
+      "expectations": [
+        "Adds an error code to each failure that matches a server log line",
+        "Shows the code to the operator with a way to send a report to the developer",
+        "Reproduces the payment failure against a local database with the action harness or a test",
+        "Fixes the root cause in the domain module, keeping money in integer cents"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Looks good, the dashboard is done right? Rate it.",
+      "expected_output": "Does not declare it done without evidence: screenshots each screen at phone and desktop widths, scores it on hierarchy, redundancy, alignment, affordance, type, density and fit to the operator's day, fixes what costs points, and reports honest scores on five axes with the path to 10/10.",
+      "files": [],
+      "expectations": [
+        "Takes fresh screenshots at phone and desktop widths before scoring",
+        "Reports honest scores on design harmony, UI and UX, fluidity, functionality and practicality",
+        "Gives a concrete path to 10/10 for each axis below 10",
+        "Refuses to call a screen done below 9/10 and fixes what costs points first"
+      ]
+    }
+  ]
+}
