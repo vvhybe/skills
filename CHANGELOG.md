@@ -15,7 +15,7 @@ The second skill: a developer guide for any repository, written as a learning bo
 - **A cover image** next to the PDF, for READMEs and link previews; the Word edition opens on the same cover.
 - **References** for research, writing (Diátaxis, the chapter anatomy, callouts, quizzes, diagrams), the cover, and build and verification. **Templates** for the config, home page, chapter and glossary.
 - `DEV_GUIDE_OUT` to build previews without touching the repository; evals; cover regression tests.
-- **Safe builds of untrusted repositories:** the author's raw HTML is cleaned, images must come from the guide, the PDF engine reads only the guide, the skill's assets and the work dir (never the network, never attachments), outputs stay in the repository, and config text is escaped.
+- **Safe builds of untrusted repositories:** one parser-based enforcement pass over the finished book (tag and attribute allowlists, every fetchable URL confined to the guide, the skill's assets and the work dir, no attachments), a WeasyPrint fetcher with the same limits and no network, outputs confined to the repository, cover colours and plate paths validated, and every config or page-derived string escaped.
 
 ### Changed
 

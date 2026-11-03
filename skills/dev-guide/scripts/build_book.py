@@ -32,6 +32,7 @@ from pygments.util import ClassNotFound
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from docx_model import chapter_model  # noqa: E402
+from safe_html import enforce  # noqa: E402
 
 SKILL = Path(__file__).resolve().parent.parent
 REPO = Path(sys.argv[1]).resolve()
@@ -246,7 +247,7 @@ def transform_stats(soup: BeautifulSoup) -> None:
         labels = [td.get_text(strip=True) for td in table.find("tbody").find_all("td")]
         wrap = soup.new_tag("div", attrs={"class": "stats"})
         for i, (n, l) in enumerate(zip(numbers, labels)):
-            wrap.append(BeautifulSoup(f'<div class="stat tile-{i % 5}"><div class="n">{n}</div><div class="l">{l}</div></div>', "html.parser"))
+            wrap.append(BeautifulSoup(f'<div class="stat tile-{i % 5}"><div class="n">{htmllib.escape(n)}</div><div class="l">{htmllib.escape(l)}</div></div>', "html.parser"))
         table.replace_with(wrap)
         comment.extract()
 
@@ -321,46 +322,10 @@ def details_fix(html: str) -> str:
     return html
 
 
-DROP_TAGS = {"script", "style", "link", "meta", "base", "object", "embed", "iframe", "frame", "frameset",
-             "form", "input", "button", "textarea", "select", "svg", "math", "audio", "video", "source", "track"}
-DROP_ATTRS = re.compile(r"^(on.*|style|rel|srcset|background|formaction|data|poster|xlink:href)$", re.I)
-SAFE_LINK = re.compile(r"^(https?:|mailto:|#|[^:]*$)", re.I)
-TAG = re.compile(r"<\s*(/?)\s*([a-zA-Z][a-zA-Z0-9:-]*)((?:[^>\"']|\"[^\"]*\"|'[^']*')*)>")
-ATTR = re.compile(r"""([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+)))?""")
-
-
 def css_string(text: str) -> str:
-    """A value safe inside a CSS double-quoted string."""
-    return str(text).replace("\\", "\\\\").replace('"', '\\"').replace("\n", " ")
-
-
-def clean_html(fragment: str) -> str:
-    """Raw HTML written in the Markdown may come from any repository. Keep what a guide needs
-    (details, summary, code, tables, links, images) and drop tags and attributes that could make the
-    PDF engine read local files or the network, or run code. Applied to the author's raw HTML only,
-    never to the build's own markup."""
-    def tag(m):
-        closing, name, attrs = m.group(1), m.group(2).lower(), m.group(3)
-        if name in DROP_TAGS:
-            return ""
-        if closing:
-            return f"</{name}>"
-        kept = []
-        for a in ATTR.finditer(attrs):
-            key = a.group(1).lower()
-            value = next((v for v in a.group(2, 3, 4) if v is not None), None)
-            if DROP_ATTRS.match(key) or key.endswith(":href"):
-                continue
-            if key == "href" and value is not None and not SAFE_LINK.match(value.strip()):
-                continue
-            kept.append(key if value is None else f'{key}="{htmllib.escape(htmllib.unescape(value))}"')
-        end = "/" if attrs.rstrip().endswith("/") else ""
-        return f"<{name}{''.join(' ' + k for k in kept)}{end}>"
-    return TAG.sub(tag, fragment)
-
-
-md.add_render_rule("html_block", lambda self, tokens, idx, options, env: clean_html(tokens[idx].content))
-md.add_render_rule("html_inline", lambda self, tokens, idx, options, env: clean_html(tokens[idx].content))
+    """A value safe inside a CSS double-quoted string (and inside a <style> element)."""
+    return (str(text).replace("\\", "\\\\").replace('"', '\\"').replace("\n", " ")
+            .replace("<", "\\3C ").replace(">", "\\3E "))
 
 
 def check_images(soup: BeautifulSoup, page: str) -> None:
@@ -440,7 +405,7 @@ def build_chapter(stem: str, part: dict) -> tuple[str, dict]:
 <header class="opener">
   <div class="kicker">Part {part["roman"]} · {part["title"]}</div>
   <div class="numrow">{f'<span class="num">{int(num):02d}</span>' if num else '<span class="num gl">A–Z</span>'}</div>
-  <h1 data-running="{title}" data-part="Part {part["roman"]} · {part["title"]}">{title}</h1>
+  <h1 data-running="{htmllib.escape(title)}" data-part="Part {part["roman"]} · {part["title"]}">{htmllib.escape(title)}</h1>
   {lead_html}
 </header>'''
     obj_html = str(objectives) if objectives else ""
@@ -489,7 +454,7 @@ def part_divider(part: dict, chapters: list, desc: dict) -> str:
         d = desc.get(key, desc.get(ch["num"], ""))
         label = f'{int(ch["num"]):02d}' if ch["num"] else "A–Z"
         items.append(f'<li><a href="#{ch["id"]}"><span class="pn">{label}</span>'
-                     f'<span class="pt">{ch["title"]}</span><span class="pd">{d}</span></a></li>')
+                     f'<span class="pt">{htmllib.escape(ch["title"])}</span><span class="pd">{htmllib.escape(d)}</span></a></li>')
     return (f'<section class="divider div{part["n"]}" id="part-{part["n"]}">'
             f'<div class="roman">{part["roman"]}</div><div class="plabel">Part {part["roman"]}</div>'
             f'<h1 class="ptitle">{part["title"]}</h1><ol class="pchapters">{"".join(items)}</ol></section>\n')
@@ -503,7 +468,7 @@ def toc(all_parts: list) -> str:
         for ch in chapters:
             label = f'{int(ch["num"])}' if ch["num"] else "A–Z"
             rows.append(f'<li class="toc-ch p{part["n"]}"><a href="#{ch["id"]}"><span class="cn">{label}</span>'
-                        f'<span class="t">{ch["title"]}</span></a></li>')
+                        f'<span class="t">{htmllib.escape(ch["title"])}</span></a></li>')
     return (f'<section class="toc" id="toc"><h1 data-running="Contents">Contents</h1>'
             f'<ol class="toc-list">{"".join(rows)}</ol></section>\n')
 
@@ -542,7 +507,7 @@ def main():
                                             for ch in chs]})
     body.append(back_cover())
 
-    css = (SKILL / "assets" / "book.css").read_text(encoding="utf-8")
+    css = (SKILL / "assets" / "book.css").read_text(encoding="utf-8")  # noqa: the book's own stylesheet
     # Where a named page's background image is anchored. Prince paints it over the whole sheet;
     # WeasyPrint anchors it to the content box, which would push the part tab off the right
     # edge, so it is shifted back by the page's left and top margins.
@@ -561,6 +526,9 @@ def main():
 </style></head><body>
 {"".join(body)}
 </body></html>'''
+    # One parser-based pass over the finished book: an allowlist of tags and attributes, and every
+    # URL checked against the folders the book may read. The engine then parses exactly this tree.
+    html = enforce(html, [GUIDE, SKILL / "assets", BUILD])
     (BUILD / "book.html").write_text(html, encoding="utf-8")
     (BUILD / "model.json").write_text(json.dumps(model, indent=1), encoding="utf-8")
     print("chapters:", sum(len(c) for _, c in all_parts), "diagrams:", len(list(DIAGRAMS.glob("*.png"))))

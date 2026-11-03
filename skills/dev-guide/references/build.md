@@ -61,9 +61,9 @@ About a minute for a 50-page guide, two to three for a 100-page one. Outputs go 
 
 A guide's pages may come from a repository you don't control, so the build treats them as untrusted:
 
-- **Raw HTML in the Markdown is cleaned** before it reaches the book: scripts, styles, `link`, `object`, `embed`, `iframe`, forms, SVG and media tags are dropped, as are event handlers, inline styles, `rel`, `srcset` and `javascript:` links. `details`, `summary`, `code`, tables, links and images stay.
-- **Images** must resolve inside the guide folder (or the work dir, for rendered diagrams); anything else is dropped with a warning.
-- **The PDF engine can read only** the guide folder, the skill's assets and the work dir, and never the network (`render_pdf.py`'s URL fetcher; Prince runs with `--no-network`). Without this, a page could embed local files as PDF attachments.
+- **One enforcement pass over the finished book** (`safe_html.py`): the assembled HTML is parsed once, only an allowlist of tags and attributes survives, every URL a PDF engine could fetch (`img src`, CSS `url()`) must resolve inside the guide folder, the skill's assets or the work dir, links keep only anchors, http(s) and mailto, and `rel` is dropped so nothing becomes an attachment. The engine then reads the re-serialized tree, so it parses exactly what was checked.
+- **Images** in the pages must resolve inside the guide folder (or the work dir, for rendered diagrams); anything else is dropped with a warning.
+- **WeasyPrint's fetcher** (`render_pdf.py`) is a second wall: it reads only those folders and never the network. Prince has no such hook; it runs with `--no-network` behind the same enforcement pass. Prefer WeasyPrint for repositories you don't trust. Without these, a page could embed local files as PDF attachments.
 - **Outputs stay inside the repository** (or `DEV_GUIDE_OUT`); `repo_name` must be a plain name and `guide_dir` must be inside the repo.
 - **Config text is escaped** wherever it lands in HTML or CSS.
 

@@ -11,6 +11,7 @@ With --preview it also renders the cover alone to a one-page PDF, for fast itera
 import html
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -24,10 +25,21 @@ SKILL = Path(__file__).resolve().parent.parent
 BUILD.mkdir(parents=True, exist_ok=True)
 COVER = CFG.get("cover", {})
 STYLE = COVER.get("style", "plate")
-INK = COVER.get("ink", "#1d1b18")            # the plate's printing ink
-PAPER = COVER.get("paper", "#fbfaf7")        # the ground of the upper cover
-COLOUR = COVER.get("colour", "#1f3a5f")      # the volume's colour: the lower panel
-ON = COVER.get("on_colour", "#fbfaf7")       # type on the panel
+HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
+
+
+def colour(key, default):
+    """Colours go into a style attribute: accept #rrggbb only."""
+    value = str(COVER.get(key, default))
+    if not HEX.match(value):
+        sys.exit(f"cover.{key} must be a #rrggbb colour, not {value!r}")
+    return value
+
+
+INK = colour("ink", "#1d1b18")            # the plate's printing ink
+PAPER = colour("paper", "#fbfaf7")        # the ground of the upper cover
+COLOUR = colour("colour", "#1f3a5f")      # the volume's colour: the lower panel
+ON = colour("on_colour", "#fbfaf7")       # type on the panel
 e = html.escape
 
 
@@ -40,6 +52,8 @@ def plate():
     """Clean the scan and print it in one ink on the cover's paper. Returns (src, credit, caption)."""
     spec = COVER.get("plate") or {}
     src = (REPO / spec["file"]).resolve()
+    if not src.is_relative_to(REPO):
+        sys.exit(f"cover plate must be inside the repository (docs/guide/assets/cover/): {spec['file']}")
     if not src.is_file():
         sys.exit(f"cover plate not found: {src}")
     credit = spec.get("credit")
