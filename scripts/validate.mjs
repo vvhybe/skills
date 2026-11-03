@@ -58,8 +58,9 @@ for (const name of readdirSync(skillsDir)) {
 
   // Relative links in every Markdown file resolve
   let links = 0;
-  for (const file of walk(dir).filter((f) => extname(f) === '.md')) {
-    const md = readFileSync(file, 'utf8').replace(/```[\s\S]*?```/g, '');
+  // templates hold placeholder links like (01-<slug>.md); they are filled in per project
+  for (const file of walk(dir).filter((f) => extname(f) === '.md' && !f.includes('/assets/templates/'))) {
+    const md = readFileSync(file, 'utf8').replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
     for (const [, target] of md.matchAll(/\]\(([^)\s]+)\)/g)) {
       if (/^(https?:|mailto:|#)/.test(target)) continue;
       const path = target.split('#')[0];
@@ -75,7 +76,8 @@ for (const name of readdirSync(skillsDir)) {
     const rel = relative(repo, file);
     const ext = extname(file);
     let run = null;
-    if (ext === '.mjs' || (ext === '.js' && !file.includes('/playwright/'))) run = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
+    if (ext === '.mjs' || ext === '.cjs' || (ext === '.js' && !file.includes('/playwright/'))) run = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
+    else if (ext === '.py') run = spawnSync('python3', ['-c', 'import ast, sys; ast.parse(open(sys.argv[1]).read(), sys.argv[1])', file], { encoding: 'utf8' });
     else if (ext === '.js') {
       // Playwright MCP wraps the file as `await (<file>)(page)`: it must be one function expression.
       // vm.Script only compiles the source; nothing runs.
