@@ -12,7 +12,10 @@
 
 # vvhybe/skills
 
-Agent skills for shipping real work, end to end. The first one is **site-upgrade**.
+Agent skills for shipping real work, end to end:
+
+- **[site-upgrade](#site-upgrade)** turns a website into one its owner is proud to show.
+- **[dev-guide](#dev-guide)** writes a developer guide for any repository and typesets it as a real book.
 
 ## site-upgrade
 
@@ -225,6 +228,27 @@ skills/site-upgrade/
 └── evals/                    prompts and expectations for testing the skill
 ```
 
+## dev-guide
+
+Most generated documentation is a pile of pages. **dev-guide** writes a *book*: a guided tour of a codebase for a capable developer who has never seen it, checked fact by fact against the code, then typeset as a PDF and a Word file that look like they came from a publisher.
+
+- **Linked Markdown first.** `docs/guide/` reads on GitHub or in Obsidian: four parts, chapters that open with what they cover and close with questions that check understanding, callouts, Mermaid diagrams and a glossary.
+- **Every fact has a source.** Each claim traces to a `path:line`, and each number to a command that is re-run before it goes on a page.
+- **Covers like a real technical series.** One public-domain engraving tied to the subject (a botanical woodcut, an 1819 printing-press plate, a plate from Diderot's *Encyclopédie*), printed in one ink above a panel in the volume's colour and set in EB Garamond. `find_plate.py` searches open collections and records each plate's credit, which prints on the back cover.
+- **Series.** Sibling repositories become Volume I, II and III of one set.
+- **Both editions match.** The PDF, the Word file and a cover thumbnail come from one build, with free software only (WeasyPrint and poppler).
+- **Safe on any repository.** Raw HTML in the pages is cleaned, and the PDF engine can read only the guide, never the network.
+
+```bash
+npx skills add vvhybe/skills --skill dev-guide
+```
+
+```text
+Write a developer guide for this repository so new engineers can onboard, and give us a printable PDF.
+```
+
+It learned from [Diátaxis](https://diataxis.fr) (what kind of documentation a guide is), from the long tradition of engraved covers on technical books, and from open collections such as [Wikimedia Commons](https://commons.wikimedia.org) and the [Art Institute of Chicago](https://www.artic.edu/open-access) that put public-domain plates within reach.
+
 ## Standing on shoulders
 
 site-upgrade learned from the best open design skills and credits them gladly. If you have them installed, it uses them in the direction phase.
@@ -235,7 +259,7 @@ site-upgrade learned from the best open design skills and credits them gladly. I
 - [**img2threejs**](https://github.com/img2threejs/img2threejs): procedural Three.js reconstruction from a reference image, the second rung of the 3D source ladder.
 - [**claude-seo**](https://github.com/AgriciDaniel/claude-seo) by AgriciDaniel: current search guidance the SEO phase defers to.
 
-Where those skills focus on the page, site-upgrade wraps the whole engagement around it: truth, conversion, standards, verification and delivery.
+Where those skills focus on the page, site-upgrade wraps the whole engagement around it: truth, conversion, standards, verification and delivery. The two skills share their rules: real material over decoration, every claim sourced, and verification before anyone says "done".
 
 ## Contributing
 

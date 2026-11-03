@@ -14,7 +14,9 @@
       "description": "Upgrades a company, product or personal website into a premium, truthful site, end to end: truth audit, brand-derived direction, signature moments, a contact form that delivers, SEO and web standards, real-browser verification with a scored critique, and reviewable PRs.",
       "version": "2.0.0",
       "source": "./",
-      "skills": ["./skills/site-upgrade"],
+      "skills": [
+        "./skills/site-upgrade"
+      ],
       "author": {
         "name": "vvhybe",
         "url": "https://github.com/vvhybe"
@@ -23,7 +25,41 @@
       "repository": "https://github.com/vvhybe/skills",
       "license": "MIT",
       "category": "design",
-      "keywords": ["website", "redesign", "design", "frontend", "seo", "nextjs", "agent-skills"]
+      "keywords": [
+        "website",
+        "redesign",
+        "design",
+        "frontend",
+        "seo",
+        "nextjs",
+        "agent-skills"
+      ]
+    },
+    {
+      "name": "dev-guide",
+      "description": "Writes a textbook-style developer guide for any repository and typesets it as a real book: linked Markdown pages, PDF and Word editions, and a publisher-grade cover with a public-domain plate. Every fact checked against the code.",
+      "version": "2.0.0",
+      "source": "./",
+      "skills": [
+        "./skills/dev-guide"
+      ],
+      "author": {
+        "name": "vvhybe",
+        "url": "https://github.com/vvhybe"
+      },
+      "homepage": "https://github.com/vvhybe/skills",
+      "repository": "https://github.com/vvhybe/skills",
+      "license": "MIT",
+      "category": "documentation",
+      "keywords": [
+        "documentation",
+        "developer-guide",
+        "onboarding",
+        "pdf",
+        "docx",
+        "book",
+        "agent-skills"
+      ]
     }
   ]
 }

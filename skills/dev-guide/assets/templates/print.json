@@ -1,0 +1,66 @@
+{
+  "repo_name": "acme-api",
+  "guide_dir": "docs/guide",
+  "pdf": "docs/acme-api-developer-guide.pdf",
+  "docx": "docs/acme-api-developer-guide.docx",
+  "cover_image": "docs/acme-api-developer-guide-cover.png",
+  "title": "Acme API",
+  "subtitle": "Developer Guide",
+  "org": "Acme",
+  "author": "Acme",
+  "tagline": "What happens to a request, how each layer works, and why every rule exists.",
+  "edition": "Edition 1, March 2027",
+  "as_of": "14 March 2027",
+  "colophon": "Written against acme-api 2.3.0 (commit 1a2b3c4).",
+  "footer": "Acme API · Developer Guide",
+  "legal": "MIT License. Copyright © 2027 Acme.",
+  "cover": {
+    "style": "plate",
+    "series": "Acme developer guides",
+    "volume": "Volume I",
+    "colour": "#1F3A5F",
+    "plate": {
+      "file": "docs/guide/assets/plate/plate.jpg",
+      "caption": "What the plate shows. Engraving by its maker, year."
+    }
+  },
+  "parts": [
+    {
+      "roman": "I",
+      "title": "The big picture",
+      "files": [
+        "01",
+        "02",
+        "03"
+      ]
+    },
+    {
+      "roman": "II",
+      "title": "The public contract",
+      "files": [
+        "04",
+        "05",
+        "06"
+      ]
+    },
+    {
+      "roman": "III",
+      "title": "Inside",
+      "files": [
+        "07",
+        "08",
+        "09"
+      ]
+    },
+    {
+      "roman": "IV",
+      "title": "Running and reference",
+      "files": [
+        "10",
+        "11",
+        "12",
+        "glossary"
+      ]
+    }
+  ]
+}

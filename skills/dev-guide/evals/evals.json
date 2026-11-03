@@ -1,0 +1,51 @@
+{
+  "skill_name": "dev-guide",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a developer guide for this repository so new engineers can onboard, and give us a printable PDF too.",
+      "expected_output": "Reads the repo's agent and contribution rules, builds a fact sheet with path:line sources and counted numbers, plans four parts, writes the home page, chapters and glossary from the templates, finds and credits a public-domain cover plate, builds the PDF, Word file and cover image, and verifies every page.",
+      "files": [],
+      "expectations": [
+        "Builds a fact sheet before writing, with a source for each claim and a command for each number",
+        "Uses the four-part structure and the chapter anatomy (In this chapter, lead, sections, Check yourself, nav)",
+        "Chooses a cover plate from the subject and records its credit and licence",
+        "Builds with build.sh and reviews the pages with contact sheets before reporting"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our guide's cover looks like cheap clip art. Make it look like a real developer book.",
+      "expected_output": "Reads cover.md, explains what professional technical covers do, searches open collections with find_plate.py for a plate tied to the project's name or craft, shows candidates as a contact sheet, previews with make_cover.py --preview, and never uses stock illustration or a publisher's trade dress.",
+      "files": [],
+      "expectations": [
+        "Proposes a real public-domain plate tied to the subject rather than an illustration of the UI",
+        "Shows two or three candidates and recommends one",
+        "Records the plate's credit for the back cover",
+        "Does not imitate a specific publisher's trade dress"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We have three related repos (a service, its plugins and its SDK). Can their guides feel like one set?",
+      "expected_output": "Makes them volumes of one series: the same cover.series, Volume I/II/III, one plate per volume from one family of subjects, one colour per volume starting from the brand colour, and checks the covers side by side.",
+      "files": [],
+      "expectations": [
+        "Uses a shared series name and volume numbers in each repo's .print.json",
+        "Picks plates from one family of subjects",
+        "Gives each volume its own colour, starting from the brand colour",
+        "Writes each guide in its own repository and cross-references instead of duplicating"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Generate an OpenAPI reference for our endpoints.",
+      "expected_output": "Recognises an API reference request, which this skill excludes, and does not write a textbook-style guide for it; suggests generating reference docs from the schema instead.",
+      "files": [],
+      "expectations": [
+        "Does not start the developer-guide workflow for a pure API reference",
+        "Points to generated reference documentation instead"
+      ]
+    }
+  ]
+}
