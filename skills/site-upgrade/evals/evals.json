@@ -1,0 +1,88 @@
+{
+  "skill_name": "site-upgrade",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Our app's marketing site still looks like the template we bought. Spice it up, make it premium. The app repo is in ../app and there's a promo video in assets/reel.mp4.",
+      "expected_output": "Discovery before design: reads the app code for shipped features, writes a claims ledger, runs video-prep.sh on the reel, reports findings and a direction with an idea sentence that fails the competitor test, then builds the home page first with the real product as hero.",
+      "files": [],
+      "expectations": [
+        "Reads the product's source before writing feature copy and lists what is not shipped",
+        "Removes or refuses invented social proof and unsourced numbers",
+        "States an idea sentence of the form 'On this site, X becomes Y' drawn from the subject, and a competitor test",
+        "Derives the palette from brand material (the video, the logo, the app UI) rather than a category default",
+        "Proposes starting with the home page and asks remaining owner questions once, with options, without stopping the build",
+        "Plans verification at 1440, 1920x710, 390 and 320, in reduced motion, on a production build"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "The owner looked at the redesign and said: 'not enough spice, it's just we added a video, it still feels like PowerPoint.' What do you change?",
+      "expected_output": "Reads feedback.md and responds with more product, interaction and depth (a live demo of the core job, a pinned scroll story, state-driven tiles), not more decoration; replaces stacked centered fade-in blocks with composition.",
+      "files": [],
+      "expectations": [
+        "Interprets the feedback as a request for product, interaction and depth rather than ornament",
+        "Names at least one concrete live element made from the real product (for example an editable document that updates)",
+        "Removes identical fade-ups on every section",
+        "Does not add gradients, glows or decorative blobs as the answer"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We need a help center for our mobile app. Should it be docs.ourapp.com or help.ourapp.com, and how should it look compared with the marketing site?",
+      "expected_output": "Treats it as a Read-mode surface: recommends help.* for a consumer app, the brand owning the frame while the reading column stays calm, guides grounded in real app screens, the app's own icons and tones per topic, inline glossary, feedback widget, AI-ready pages, and links from the marketing site with UTM tags.",
+      "files": [],
+      "expectations": [
+        "Recommends help. (or support.) over docs. for a consumer product and explains why",
+        "Separates frame (brand) from reading column (calm, real measure, real contrast)",
+        "Grounds guides in the real app at a release tag rather than generic text",
+        "Mentions at least two of: inline glossary, was-this-helpful feedback, Markdown pages or llms.txt for AI, store badges with a working QR code"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Add a 3D version of our logo's astronaut as a mascot on the homepage.",
+      "expected_output": "Reads three-d.md, asks whether the owner has a source model first, explains the source ladder (owner's model, procedural reconstruction, image-to-3D, primitives), the exactness gate against the logo, and the runtime rules (lazy start, pause off screen, poster fallback, reduced motion, CSP for WebAssembly decoders).",
+      "files": [],
+      "expectations": [
+        "Asks for the owner's source model (.blend, .glb) before building anything",
+        "Describes comparing a render with the reference at the same view before shipping",
+        "Includes a poster or static fallback for reduced motion and no WebGL",
+        "Mentions lazy initialisation and pausing rendering off screen"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Our admin dashboard feels clunky. Can you make the orders table and the settings page premium?",
+      "expected_output": "Recognizes an app dashboard, which this skill excludes, and does not run the site-upgrade workflow on it; points to a dashboard-oriented skill or handles it as app UI work.",
+      "files": [],
+      "expectations": [
+        "Does not apply the marketing-site workflow (acts, hero, signature moments) to a dashboard",
+        "Says the request is outside this skill's scope or uses a more fitting approach"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Run an SEO and Open Graph pass on our site. Don't touch the design.",
+      "expected_output": "Goes straight to seo-standards.md: server rendering check first, metadata, social cards, structured data, crawler files and headers, verified with ssr-audit.sh and console-scan.js on a production build; makes no visual redesign.",
+      "files": [],
+      "expectations": [
+        "Starts by checking server rendering with ssr-audit.sh or an equivalent",
+        "Leaves layout, palette and type unchanged",
+        "Covers canonical URLs, Open Graph and structured data",
+        "Verifies on a production build, not the dev server"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Redesign the website of a small architecture studio. There's no product, just the studio, its projects and a contact page.",
+      "expected_output": "Finds truth sources without a product repo (owner's answers, real project photos and drawings, legal identity, business profile), likely treats the portfolio pages as Experience mode, builds the idea from the studio's own work and place, and never invents clients, awards or quotes.",
+      "files": [],
+      "expectations": [
+        "Uses the owner's answers, real project material and public records as truth sources instead of code",
+        "Uses the studio's real work as the hero rather than stock imagery",
+        "Does not invent clients, awards, testimonials or figures"
+      ]
+    }
+  ]
+}

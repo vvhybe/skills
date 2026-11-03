@@ -1,0 +1,29 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "vvhybe",
+  "owner": {
+    "name": "vvhybe",
+    "url": "https://github.com/vvhybe"
+  },
+  "metadata": {
+    "description": "Agent skills for shipping real work, end to end."
+  },
+  "plugins": [
+    {
+      "name": "site-upgrade",
+      "description": "Upgrades a company, product or personal website into a premium, truthful site, end to end: truth audit, brand-derived direction, signature moments, a contact form that delivers, SEO and web standards, real-browser verification with a scored critique, and reviewable PRs.",
+      "version": "2.0.0",
+      "source": "./",
+      "skills": ["./skills/site-upgrade"],
+      "author": {
+        "name": "vvhybe",
+        "url": "https://github.com/vvhybe"
+      },
+      "homepage": "https://github.com/vvhybe/skills",
+      "repository": "https://github.com/vvhybe/skills",
+      "license": "MIT",
+      "category": "design",
+      "keywords": ["website", "redesign", "design", "frontend", "seo", "nextjs", "agent-skills"]
+    }
+  ]
+}
