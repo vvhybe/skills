@@ -4,6 +4,10 @@ All notable changes to the skills in this repository. Versions follow [Semantic 
 
 ## Unreleased
 
+### Docs
+
+- Each skill has its own README (showcase, how it works, install, tools), with its media under `docs/<skill>/`. The root README presents the collection.
+
 ## dev-guide 2.0.0 (2026-11-03)
 
 The second skill: a developer guide for any repository, written as a learning book and typeset as one. Version 1 was a private skill built on three related repositories; its instructions had been truncated and its references lost, so 2.0 reconstructs them from the guides it produced and generalizes the pipeline.

@@ -41,6 +41,6 @@ A help center built from nothing, from the app's screenshots and its code, that 
 
 ## What it taught the skill
 
-- A whole new mode, Read, with its own rules → [`read-mode.md`](../../skills/site-upgrade/references/read-mode.md)
-- "Cheap trick" and "average purple AI" in the feedback decoder → [`feedback.md`](../../skills/site-upgrade/references/feedback.md)
-- QR codes with a logo, and brand logos from a CDN → [`media.md`](../../skills/site-upgrade/references/media.md)
+- A whole new mode, Read, with its own rules → [`read-mode.md`](../../../skills/site-upgrade/references/read-mode.md)
+- "Cheap trick" and "average purple AI" in the feedback decoder → [`feedback.md`](../../../skills/site-upgrade/references/feedback.md)
+- QR codes with a logo, and brand logos from a CDN → [`media.md`](../../../skills/site-upgrade/references/media.md)

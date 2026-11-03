@@ -42,8 +42,8 @@ Every figure on the new site had to trace to a source. Figures nobody could sour
 
 ## What it taught the skill
 
-- Two directions, compared on branches, then merged and archived → [`direction.md`](../../skills/site-upgrade/references/direction.md) § 7
-- Color theory as a relationship, not a list → [`direction.md`](../../skills/site-upgrade/references/direction.md) § 3
-- When 3D earns its place, and why the owner's own model beats any approximation → [`three-d.md`](../../skills/site-upgrade/references/three-d.md)
-- B2B blocks: problem-to-answer art, honest comparison, catalog to prefilled lead, own booking UI → [`building-blocks.md`](../../skills/site-upgrade/references/building-blocks.md)
-- Static export plus a few Functions on Cloudflare Pages, a new hosting project with the old one kept for rollback → [`seo-standards.md`](../../skills/site-upgrade/references/seo-standards.md) § 7
+- Two directions, compared on branches, then merged and archived → [`direction.md`](../../../skills/site-upgrade/references/direction.md) § 7
+- Color theory as a relationship, not a list → [`direction.md`](../../../skills/site-upgrade/references/direction.md) § 3
+- When 3D earns its place, and why the owner's own model beats any approximation → [`three-d.md`](../../../skills/site-upgrade/references/three-d.md)
+- B2B blocks: problem-to-answer art, honest comparison, catalog to prefilled lead, own booking UI → [`building-blocks.md`](../../../skills/site-upgrade/references/building-blocks.md)
+- Static export plus a few Functions on Cloudflare Pages, a new hosting project with the old one kept for rollback → [`seo-standards.md`](../../../skills/site-upgrade/references/seo-standards.md) § 7
