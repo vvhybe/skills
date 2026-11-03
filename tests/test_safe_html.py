@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "skills" / "dev-guide" / "scripts"))
-from safe_html import UnsafeBook, enforce  # noqa: E402
+from safe_html import enforce, with_stylesheet  # noqa: E402
 
 ROOTS = ["/work/guide", "/work/skill/assets", "/work/build"]
 
@@ -37,12 +37,20 @@ class Enforce(unittest.TestCase):
         for alt in ("one", "two", "three", "four"):
             self.assertIn(alt, out)
 
-    def test_css_urls_are_checked(self):
+    def test_style_attributes_only_in_the_builds_own_form(self):
         out = run('<p style="background:url(file:///etc/passwd)">a</p>'
-                  '<p style="background:url(&quot;/etc/passwd&quot;)">b</p>'
-                  '<p style="background:url(/work/build/tab1.svg)">c</p>')
-        self.assertNotIn("/etc/passwd", out)
-        self.assertIn("/work/build/tab1.svg", out)
+                  '<p style="background:u\\72l(/etc/passwd)">b</p>'
+                  '<p style="width:120mm; background:url(/etc/passwd)">c</p>'
+                  '<img src="/work/build/a.png" style="width:120.5mm">')
+        self.assertNotIn("passwd", out)
+        self.assertNotIn("u\\72l", out)
+        self.assertIn('style="width:120.5mm"', out)
+
+    def test_svg_data_images_are_refused(self):
+        out = run('<img src="data:image/svg+xml,<svg><image href=\'file:///etc/passwd\'/></svg>" alt="svg">'
+                  '<img src="data:image/png;base64,iVBORw0KGgo=" alt="png">')
+        self.assertNotIn("svg+xml", out)
+        self.assertIn("data:image/png", out)
 
     def test_entity_encoded_markup_stays_text(self):
         out = run("<p>&lt;link rel=&quot;attachment&quot; href=&quot;file:///etc/passwd&quot;&gt;</p>")
@@ -63,15 +71,22 @@ class Enforce(unittest.TestCase):
         self.assertNotIn("marquee", out)
         self.assertNotIn("hidden", out)
 
-    def test_style_elements_outside_head_are_removed(self):
-        out = run("<style>p{background:url(file:///etc/passwd)}</style><p>x</p>")
+    def test_every_style_element_is_removed(self):
+        out = run("<style>p{background:url(file:///etc/passwd)}</style><p>x</p>",
+                  head="<style>@font-face{src:url('/etc/fonts/x.ttf')}</style>")
+        self.assertNotIn("<style", out)
         self.assertNotIn("passwd", out)
 
-    def test_the_books_own_stylesheet_must_stay_inside(self):
-        with self.assertRaises(UnsafeBook):
-            run("<p>x</p>", head="<style>@font-face{src:url('/etc/fonts/x.ttf')}</style>")
-        out = run("<p>x</p>", head="<style>@font-face{src:url('/work/skill/assets/fonts/Inter.ttf')}</style>")
-        self.assertIn("Inter.ttf", out)
+    def test_nested_head_cannot_carry_a_stylesheet(self):
+        out = run("<head><style>p{background:url(file:///etc/passwd)}</style></head><p>x</p>")
+        self.assertNotIn("passwd", out)
+        self.assertEqual(out.count("<head>"), 1)
+
+    def test_the_books_stylesheet_is_added_after_enforcement(self):
+        out = with_stylesheet(run("<p>&lt;/head&gt; stays text</p>"), "body{color:red}")
+        self.assertEqual(out.count("<style>"), 1)
+        self.assertLess(out.index("<style>"), out.index("<body>"))
+        self.assertIn("&lt;/head&gt; stays text", out)
 
 
 if __name__ == "__main__":

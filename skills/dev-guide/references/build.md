@@ -49,8 +49,8 @@ About a minute for a 50-page guide, two to three for a 100-page one. Outputs go 
 
   ```markdown
   > **Printable editions.** The same guide as a designed book: [PDF](../<name>-developer-guide.pdf) for printing, [Word](../<name>-developer-guide.docx) for editing. Both are built from these pages; rebuild them when the pages change.
-
-  [![The printed edition's cover](../<name>-developer-guide-cover.png)](../<name>-developer-guide.pdf)
+  >
+  > [![The printed edition's cover](../<name>-developer-guide-cover.png)](../<name>-developer-guide.pdf)
   ```
 
 - Link the guide from the repository's README.
@@ -61,7 +61,7 @@ About a minute for a 50-page guide, two to three for a 100-page one. Outputs go 
 
 A guide's pages may come from a repository you don't control, so the build treats them as untrusted:
 
-- **One enforcement pass over the finished book** (`safe_html.py`): the assembled HTML is parsed once, only an allowlist of tags and attributes survives, every URL a PDF engine could fetch (`img src`, CSS `url()`) must resolve inside the guide folder, the skill's assets or the work dir, links keep only anchors, http(s) and mailto, and `rel` is dropped so nothing becomes an attachment. The engine then reads the re-serialized tree, so it parses exactly what was checked.
+- **One enforcement pass over the finished book** (`safe_html.py`): the assembled HTML is parsed once, only an allowlist of tags and attributes survives, every image the engine could fetch must resolve inside the guide folder, the skill's assets or the work dir (or be a raster `data:` image), links keep only anchors, http(s) and mailto, and `rel` is dropped so nothing becomes an attachment. No CSS from a page is ever parsed: every `<style>` element is removed, `style` attributes survive only in the one form the build writes (`width: …mm`), and the book's own stylesheet is added after the checks. The engine then reads the re-serialized tree, so it parses exactly what was checked.
 - **Images** in the pages must resolve inside the guide folder (or the work dir, for rendered diagrams); anything else is dropped with a warning.
 - **WeasyPrint's fetcher** (`render_pdf.py`) is a second wall: it reads only those folders and never the network. Prince has no such hook; it runs with `--no-network` behind the same enforcement pass. Prefer WeasyPrint for repositories you don't trust. Without these, a page could embed local files as PDF attachments.
 - **Outputs stay inside the repository** (or `DEV_GUIDE_OUT`); `repo_name` must be a plain name and `guide_dir` must be inside the repo.

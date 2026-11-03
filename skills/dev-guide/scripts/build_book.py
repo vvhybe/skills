@@ -32,7 +32,7 @@ from pygments.util import ClassNotFound
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from docx_model import chapter_model  # noqa: E402
-from safe_html import enforce  # noqa: E402
+from safe_html import enforce, with_stylesheet  # noqa: E402
 
 SKILL = Path(__file__).resolve().parent.parent
 REPO = Path(sys.argv[1]).resolve()
@@ -348,6 +348,10 @@ def page_html(stem: str) -> tuple[BeautifulSoup, dict]:
     env = {}
     html = md.render(text, env)
     soup = BeautifulSoup(html, "html.parser")
+    # the printed editions do not advertise themselves (the note may carry the cover thumbnail)
+    for bq in soup.find_all("blockquote"):
+        if "Printable editions" in bq.get_text():
+            bq.decompose()
     check_images(soup, name)
     info = {"file": name, "diagrams": env.get("diagrams", [])}
     h1 = soup.find("h1")
@@ -429,10 +433,6 @@ def build_about() -> str:
             break
         node.extract()
         node = nxt
-    # the printed editions do not advertise themselves
-    for bq in soup.find_all("blockquote"):
-        if "Printable editions" in bq.get_text():
-            bq.decompose()
     rewrite_links(soup)
     transform_callouts(soup)
     transform_stats(soup)
@@ -521,14 +521,13 @@ def main():
 <title>{E["title"]} — {E.get("subtitle", "Developer Guide")}</title>
 <meta name="author" content="{E.get("author", "")}">
 <meta name="subject" content="{E["tagline"]}">
-<style>{css}
-{pyg}
-</style></head><body>
+</head><body>
 {"".join(body)}
 </body></html>'''
     # One parser-based pass over the finished book: an allowlist of tags and attributes, and every
     # URL checked against the folders the book may read. The engine then parses exactly this tree.
     html = enforce(html, [GUIDE, SKILL / "assets", BUILD])
+    html = with_stylesheet(html, f"{css}\n{pyg}")      # the book's own stylesheet, added after the checks
     (BUILD / "book.html").write_text(html, encoding="utf-8")
     (BUILD / "model.json").write_text(json.dumps(model, indent=1), encoding="utf-8")
     print("chapters:", sum(len(c) for _, c in all_parts), "diagrams:", len(list(DIAGRAMS.glob("*.png"))))

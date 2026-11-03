@@ -5,8 +5,11 @@ Before the PDF engine sees anything, enforce() parses the whole book once and:
 
   - keeps only an allowlist of tags (unknown tags are unwrapped, dangerous ones removed with their
     content) and an allowlist of attributes;
-  - checks every URL that a PDF engine could fetch (img src, CSS url() in style attributes and
-    <style> elements) against the folders the book may read, and data: images;
+  - checks every URL that a PDF engine could fetch (img src) against the folders the book may read,
+    and allows raster data: images only;
+  - removes every <style> element and allows style attributes only in the one form the build
+    writes (width in mm), so no CSS from a page is ever parsed; the book's own stylesheet is added
+    after enforcement (with_stylesheet), never trusted because of where it sits;
   - keeps link targets that a reader clicks (a href) only for #anchors, http(s) and mailto;
   - drops rel= everywhere, so no link can become an embedded attachment.
 
@@ -21,7 +24,7 @@ from urllib.parse import unquote, urlparse
 from bs4 import BeautifulSoup, Comment
 
 ALLOWED_TAGS = {
-    "html", "head", "body", "title", "meta", "style",
+    "html", "head", "body", "title", "meta",
     "section", "header", "footer", "main", "article", "aside", "nav", "div", "span", "p", "a", "br", "hr",
     "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "li", "dl", "dt", "dd", "blockquote",
     "pre", "code", "kbd", "samp", "var", "em", "strong", "b", "i", "u", "s", "del", "ins", "sub", "sup",
@@ -31,7 +34,7 @@ ALLOWED_TAGS = {
     "svg", "g", "path", "circle", "rect", "line", "polyline", "polygon", "ellipse", "text", "tspan", "defs",
 }
 REMOVE_WITH_CONTENT = {
-    "script", "link", "object", "embed", "iframe", "frame", "frameset", "base", "form", "input", "button",
+    "script", "style", "link", "object", "embed", "iframe", "frame", "frameset", "base", "form", "input", "button",
     "textarea", "select", "option", "audio", "video", "source", "track", "image", "use", "foreignobject",
     "math", "applet", "param", "noscript", "template", "canvas", "picture", "portal", "svg:image",
 }
@@ -44,11 +47,8 @@ ALLOWED_ATTRS = {
     "fill-opacity", "stroke-opacity", "fill-rule", "clip-rule", "font-family", "font-size", "font-weight",
     "text-anchor", "dominant-baseline", "letter-spacing",
 }
-CSS_URL = re.compile(r"url\(\s*(['\"]?)(.*?)\1\s*\)", re.I | re.S)
-
-
-class UnsafeBook(Exception):
-    """The build's own stylesheet points somewhere the book may not read: a bug, not an attack."""
+STYLE_ATTR = re.compile(r"^\s*width:\s*\d+(\.\d+)?mm\s*;?\s*$")   # what the build writes on figures
+RASTER_DATA = re.compile(r"^data:image/(png|jpe?g|gif|webp)[;,]", re.I)
 
 
 def _inside(path: Path, roots: list[Path]) -> bool:
@@ -64,7 +64,7 @@ def fetchable_ok(url: str, roots: list[Path], base: Path) -> bool:
     parsed = urlparse(url)
     scheme = parsed.scheme.lower()
     if scheme == "data":
-        return url[5:].lstrip().lower().startswith("image/") or url[5:].lstrip().lower().startswith("font/")
+        return bool(RASTER_DATA.match(url))            # never data:image/svg+xml: it can carry references
     if scheme == "file":
         return _inside(Path(unquote(parsed.path)), roots)
     if scheme:
@@ -80,18 +80,18 @@ def link_ok(url: str) -> bool:
     return url.startswith("#") or scheme in ("http", "https", "mailto")
 
 
-def css_ok(css: str, roots: list[Path], base: Path) -> bool:
-    if re.search(r"@import|expression\s*\(", css, re.I):
-        return False
-    return all(fetchable_ok(m.group(2), roots, base) for m in CSS_URL.finditer(css))
-
-
 def enforce(html: str, roots, base: Path | None = None) -> str:
     roots = [Path(r).resolve() for r in roots]
     base = (base or roots[-1]).resolve()                # relative URLs resolve against the book's folder
     soup = BeautifulSoup(html, "html.parser")
     for comment in soup.find_all(string=lambda s: isinstance(s, Comment)):
         comment.extract()
+    # html, head and body only at the top of the document; anywhere else they're unwrapped
+    top = soup.find("html")
+    keep = {id(top), id(top.find("head", recursive=False)), id(top.find("body", recursive=False))} if top else set()
+    for tag in soup.find_all(["html", "head", "body"]):
+        if id(tag) not in keep:
+            tag.unwrap()
     for tag in soup.find_all(True):
         if tag.decomposed:
             continue
@@ -102,12 +102,6 @@ def enforce(html: str, roots, base: Path | None = None) -> str:
         if name not in ALLOWED_TAGS:
             tag.unwrap()
             continue
-        if name == "style":
-            if tag.find_parent("head") is None:
-                tag.decompose()                         # only the book's own stylesheet, in <head>
-                continue
-            if not css_ok(tag.get_text(), roots, base):
-                raise UnsafeBook("the book's stylesheet references a file outside the allowed folders")
         if name == "meta" and (tag.get("http-equiv") or "url" in str(tag.get("content", "")).lower()):
             tag.decompose()
             continue
@@ -121,9 +115,17 @@ def enforce(html: str, roots, base: Path | None = None) -> str:
             if keep and key == "src":
                 keep = name == "img" and fetchable_ok(value, roots, base)
             if keep and key == "style":
-                keep = css_ok(value, roots, base)
+                keep = bool(STYLE_ATTR.match(value))
             if not keep:
                 del tag.attrs[attr]
         if name == "img" and not tag.get("src"):
             tag.replace_with(tag.get("alt", ""))
     return str(soup)
+
+
+def with_stylesheet(html: str, css: str) -> str:
+    """Add the book's own stylesheet after enforcement. enforce() guarantees the only </head> left
+    is the document's own (nested heads are unwrapped, and page text is escaped)."""
+    if "</head>" not in html:
+        raise ValueError("the book has no <head>")
+    return html.replace("</head>", f"<style>{css}</style></head>", 1)
