@@ -142,7 +142,14 @@ def slug(text: str) -> str:
 
 
 def load_page(stem: str) -> tuple[str, str]:
+    # Stems come from .print.json: plain chapter numbers only, and the page must sit directly in the
+    # guide folder (no traversal, no symlink pointing elsewhere).
+    if stem != "glossary" and not re.fullmatch(r"[A-Za-z0-9_-]+", stem):
+        sys.exit(f"parts.files entries must be plain chapter numbers: {stem!r}")
     path = next(GUIDE.glob(f"{stem}*.md")) if stem != "glossary" else GUIDE / "glossary.md"
+    if path.resolve().parent != GUIDE:
+        sys.exit(f"chapter page must be inside the guide folder: {path}")
+    path = path.resolve()
     text = path.read_text(encoding="utf-8")
     text = text.split("<!-- nav -->")[0]
     text = re.sub(r"^\[Home\]\(README\.md\) › [^\n]*\n", "", text, flags=re.M)
@@ -363,7 +370,10 @@ def page_html(stem: str) -> tuple[BeautifulSoup, dict]:
 
 def descriptions() -> dict:
     """One-line chapter descriptions, read from the README's contents tables."""
-    text = (GUIDE / "README.md").read_text(encoding="utf-8")
+    home = (GUIDE / "README.md").resolve()
+    if home.parent != GUIDE:
+        sys.exit("docs/guide/README.md must be a file inside the guide folder")
+    text = home.read_text(encoding="utf-8")
     out = {}
     for m in re.finditer(r"^\| \[(?:(\d+) · )?([^\]]+)\]\(([^)]+)\) \| ([^|]+) \|$", text, re.M):
         stem = m.group(3).split("-")[0].replace(".md", "")
