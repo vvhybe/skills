@@ -14,7 +14,7 @@ All notable changes to the skills in this repository. Versions follow [Semantic 
 
 ### Docs
 
-- New banners for the collection and every recipe: zellige tilework in spice colours, *zellige m3a tebzira*.
+- New banners for the collection and every recipe, drawn from the vintage porcelain tea set of a Marrakchi home: banded rims with gold ribbons and flower cartouches, a rust lattice, an iron-red roundel with the eight-point star, the spices as glazes.
 - Each skill has its own README (showcase, how it works, install, tools), with its media under `docs/<skill>/`. The root README presents the collection.
 
 ## dev-guide 2.0.0 (2026-11-03)
