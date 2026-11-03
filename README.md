@@ -79,7 +79,7 @@ A B2B private cloud for ERP systems, taken from a template through a "ground con
 
 ## What makes it different
 
-| | |
+| Idea | In practice |
 | --- | --- |
 | **Truth before design** | A claims ledger (shipped, not shipped, unknown, numbers with their source) is filled before anything is designed. Invented proof, unsourced uptime figures and "join 10,000+ teams" never make it to the page; unknown figures leave an optional slot and a fact-check form for whoever can answer. |
 | **The brand decides the look** | An idea sentence (*"On this site, X becomes Y"*) taken from what only this company has, tested by putting the nearest competitor's name in it. Palette by color theory, sampled from the brand's own material. |
@@ -93,16 +93,16 @@ A B2B private cloud for ERP systems, taken from a template through a "ground con
 ## How it works
 
 ```mermaid
-flowchart LR
-  D["1. Discover<br/>claims ledger,<br/>subject inventory"] --> R["2. Direct<br/>idea sentence,<br/>direction contract"]
-  R --> B["3. Build it still<br/>real product,<br/>real content"]
-  B --> M["4. Motion and<br/>signature moments"]
-  M --> C["5. Contact and<br/>conversion"]
-  C --> S["6. SEO and<br/>standards (stacked PR)"]
-  S --> V{"7. Verify<br/>and critique"}
-  V -- "below 9/10" --> B
-  V -- "9/10 or more" --> P["8. Ship<br/>PRs, report,<br/>DESIGN.md"]
+flowchart TD
   O(("Owner")) -. "feedback decoder" .-> R
+  D["1. Discover: claims ledger, subject inventory"] --> R["2. Direct: idea sentence, direction contract"]
+  R --> B["3. Build it still: real product, real content"]
+  B --> M["4. Motion and signature moments"]
+  M --> C["5. Contact and conversion"]
+  C --> S["6. SEO and standards, as a stacked PR"]
+  S --> V{"7. Verify and critique"}
+  V -- "below 9/10" --> B
+  V -- "9/10 or more" --> P["8. Ship: PRs, report, DESIGN.md"]
 ```
 
 The method works on any stack; the recipes and snippets come from where they shipped (Next.js, React, Tailwind, GSAP, Cloudflare Pages), so they're Next.js-first. The agent reads one reference file per phase, only when it gets there, so the skill stays light in context: [`SKILL.md`](skills/site-upgrade/SKILL.md) is the map, and [`references/`](skills/site-upgrade/references) holds the detail.
