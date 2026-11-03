@@ -37,8 +37,8 @@ The site was a SaaS template with the app's name dropped in: centered blocks tha
 
 ## What it taught the skill
 
-- "Not enough spice" means more product, interaction and depth, never more decoration → [`feedback.md`](../../skills/site-upgrade/references/feedback.md)
-- Check every feature claim in the product's code → [`discovery.md`](../../skills/site-upgrade/references/discovery.md)
-- Demos should be the real artifact (a real A4 invoice), and a "changed" flash must track each value → [`building-blocks.md`](../../skills/site-upgrade/references/building-blocks.md)
+- "Not enough spice" means more product, interaction and depth, never more decoration → [`feedback.md`](../../../skills/site-upgrade/references/feedback.md)
+- Check every feature claim in the product's code → [`discovery.md`](../../../skills/site-upgrade/references/discovery.md)
+- Demos should be the real artifact (a real A4 invoice), and a "changed" flash must track each value → [`building-blocks.md`](../../../skills/site-upgrade/references/building-blocks.md)
 - Configuration holds values, never on/off switches (store URLs as env values; empty means "Coming soon")
-- Ship SEO as its own stacked PR, and fix server rendering before anything else → [`seo-standards.md`](../../skills/site-upgrade/references/seo-standards.md)
+- Ship SEO as its own stacked PR, and fix server rendering before anything else → [`seo-standards.md`](../../../skills/site-upgrade/references/seo-standards.md)
